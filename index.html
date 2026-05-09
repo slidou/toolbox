@@ -84,11 +84,63 @@
             font-weight: 500;
             font-size: 0.95rem;
         }
+
+        /* Style spécial pour la carte "Le Pinacle" */
+        .pinnacle-card {
+            display: block;
+            max-width: 500px;
+            margin: 0 auto 60px auto;
+            background: linear-gradient(135deg, rgba(168, 161, 246, 0.15), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(168, 161, 246, 0.4);
+            padding: 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(168, 161, 246, 0.15);
+        }
+
+        .pinnacle-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 161, 246, 0.8);
+            box-shadow: 0 0 50px rgba(168, 161, 246, 0.3);
+            background: linear-gradient(135deg, rgba(168, 161, 246, 0.25), rgba(255, 255, 255, 0.1));
+        }
+
+        .pinnacle-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .pinnacle-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .pinnacle-desc {
+            font-size: 0.9rem;
+            color: #c0bbe6;
+            line-height: 1.4;
+            display: block;
+        }
     </style>
 </head>
 <body>
 
     <h1>🧰 Toolbox</h1>
+
+    <!-- LE PINACLE -->
+    <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer" class="pinnacle-card">
+        <span class="pinnacle-icon">👑</span>
+        <span class="pinnacle-title">FMHY</span>
+        <span class="pinnacle-desc">Le répertoire ultime. Absolument tout ce dont tu peux avoir besoin sur le web y est répertorié.</span>
+    </a>
 
     <!-- ANONYMAT & MAIL -->
     <div class="category">
@@ -126,7 +178,7 @@
         </div>
     </div>
 
-        <!-- STREAMING -->
+    <!-- STREAMING -->
     <div class="category">
         <h2>🍿 Streaming</h2>
         <div class="grid">
@@ -138,6 +190,7 @@
     <div class="category">
         <h2>🖼️ Images & Émojis</h2>
         <div class="grid">
+            <a href="https://icon-sets.iconify.design/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔮</span><span class="tool-name">Iconify (Le Graal des icônes)</span></a>
             <a href="https://8mb.video/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🗜️</span><span class="tool-name">Compressor (Discord 8MB)</span></a>
             <a href="https://imageclipboard.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">😀</span><span class="tool-name">Émojis Nitro (Gratuits)</span></a>
             <a href="https://saucenao.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔍</span><span class="tool-name">Reverse Image Search</span></a>
