@@ -1,146 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toolbox</title>
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
-    
-    <style>
-        /* Fond dégradé moderne */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #ffffff;
-            margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
-        }
-
-        .category {
-            margin-bottom: 50px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .category h2 {
-            font-size: 1.1rem;
-            color: #a8a1f6;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-            border-left: 4px solid #a8a1f6;
-        }
-
-        /* La grille qui s'adapte */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        /* Effet Glassmorphism pour les cartes */
-        .tool-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px;
-            border-radius: 16px;
-            text-decoration: none;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        /* Effet de survol stylé */
-        .tool-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .tool-icon {
-            font-size: 1.8rem;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
-        
-        .tool-name {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        /* Style spécial pour la carte "Le Pinacle" */
-        .pinnacle-card {
-            display: block;
-            max-width: 500px;
-            margin: 0 auto 60px auto;
-            background: linear-gradient(135deg, rgba(168, 161, 246, 0.15), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 2px solid rgba(168, 161, 246, 0.4);
-            padding: 30px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #ffffff;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 30px rgba(168, 161, 246, 0.15);
-        }
-
-        .pinnacle-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(168, 161, 246, 0.8);
-            box-shadow: 0 0 50px rgba(168, 161, 246, 0.3);
-            background: linear-gradient(135deg, rgba(168, 161, 246, 0.25), rgba(255, 255, 255, 0.1));
-        }
-
-        .pinnacle-icon {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .pinnacle-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .pinnacle-desc {
-            font-size: 0.9rem;
-            color: #c0bbe6;
-            line-height: 1.4;
-            display: block;
-        }
-    </style>
-</head>
-<body>
-
     <h1>🧰 Toolbox</h1>
-
-    <!-- LE PINACLE -->
-    <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer" class="pinnacle-card">
-        <span class="pinnacle-icon">👑</span>
-        <span class="pinnacle-title">FMHY</span>
-        <span class="pinnacle-desc">Le répertoire ultime. Absolument tout ce dont tu peux avoir besoin sur le web y est répertorié.</span>
-    </a>
 
     <!-- ANONYMAT & MAIL -->
     <div class="category">
@@ -153,6 +11,7 @@
             <a href="https://proton.me/mail" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔒</span><span class="tool-name">ProtonMail</span></a>
             <a href="https://temporarynumber.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📱</span><span class="tool-name">Numéro Temporaire</span></a>
             <a href="https://www.tempemail.cc/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⏳</span><span class="tool-name">TempMail CC</span></a>
+            <a href="https://www.receivesmsonline.net/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📲</span><span class="tool-name">Receive SMS Online</span></a>
             <a href="https://protonvpn.com/fr/pricing" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🛡️</span><span class="tool-name">ProtonVPN</span></a>
         </div>
     </div>
@@ -186,19 +45,71 @@
         </div>
     </div>
 
+    <!-- MUSIQUE & AUDIO -->
+    <div class="category">
+        <h2>🎵 Musique & Chill</h2>
+        <div class="grid">
+            <a href="https://lucida.to/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🎶</span><span class="tool-name">Lucida (DL Spotify)</span></a>
+            <a href="https://chillhop.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🎧</span><span class="tool-name">Chillhop</span></a>
+            <a href="https://www.lofi.cafe/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">☕</span><span class="tool-name">Lofi Cafe</span></a>
+            <a href="https://www.cityhop.cafe/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🚗</span><span class="tool-name">Cityhop (Drive + Music)</span></a>
+            <a href="https://www.rainymood.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🌧️</span><span class="tool-name">Rainy Mood</span></a>
+            <a href="https://thatguyedd.github.io/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🇯🇵</span><span class="tool-name">Balade Japon + Music</span></a>
+            <a href="https://www.flowfi.app/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⏱️</span><span class="tool-name">Flowfi (Chill + Timer)</span></a>
+        </div>
+    </div>
+
     <!-- IMAGES, GIFS & EMOJIS -->
     <div class="category">
         <h2>🖼️ Images & Émojis</h2>
         <div class="grid">
-            <a href="https://icon-sets.iconify.design/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔮</span><span class="tool-name">Iconify (Le Graal des icônes)</span></a>
             <a href="https://8mb.video/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🗜️</span><span class="tool-name">Compressor (Discord 8MB)</span></a>
             <a href="https://imageclipboard.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">😀</span><span class="tool-name">Émojis Nitro (Gratuits)</span></a>
+            <a href="https://emojipedia.org/symbols" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔣</span><span class="tool-name">Emojipedia Symbols</span></a>
             <a href="https://saucenao.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔍</span><span class="tool-name">Reverse Image Search</span></a>
-            <a href="https://icon-icons.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🎨</span><span class="tool-name">Icônes (.ico)</span></a>
+            <a href="https://icon-icons.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🎨</span><span class="tool-name">Icônes (Icon-Icons)</span></a>
+            <a href="https://www.iconsdb.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🖼️</span><span class="tool-name">Icônes (IconsDB)</span></a>
             <a href="https://film-grab.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🎬</span><span class="tool-name">Film Screens</span></a>
             <a href="https://www.animgifmoji.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🎞️</span><span class="tool-name">GIF to Émoji</span></a>
             <a href="https://pixel-converter.ameniwa.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🟩</span><span class="tool-name">Image to Pixel Art</span></a>
             <a href="https://safebooru.org/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🌸</span><span class="tool-name">SafeBooru (Anime)</span></a>
+            <a href="https://photomosh.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">✨</span><span class="tool-name">PhotoMosh (Effets Glitch)</span></a>
+            <a href="https://cleanup.pictures/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🧹</span><span class="tool-name">Cleanup (Suppr. Élément)</span></a>
+            <a href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">✂️</span><span class="tool-name">Remove.bg (Suppr. Fond)</span></a>
+            <a href="https://unlimited.waifu2x.net/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔍</span><span class="tool-name">Waifu2x (Upscale x2)</span></a>
+        </div>
+    </div>
+
+    <!-- HEBERGEMENT & UPLOAD -->
+    <div class="category">
+        <h2>☁️ Hébergement & Upload</h2>
+        <div class="grid">
+            <a href="https://www.zupimages.net/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🖼️</span><span class="tool-name">Zupimages</span></a>
+            <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🖼️</span><span class="tool-name">ImgBB</span></a>
+            <a href="https://catbox.moe/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📦</span><span class="tool-name">Catbox (200MB)</span></a>
+            <a href="https://hexload.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⬆️</span><span class="tool-name">Hexload</span></a>
+            <a href="https://gofile.io/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📁</span><span class="tool-name">GoFile</span></a>
+            <a href="https://new.fileditch.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📂</span><span class="tool-name">FileDitch</span></a>
+            <a href="https://streamtape.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📼</span><span class="tool-name">Streamtape (Vidéo)</span></a>
+            <a href="https://media.cm/?op=upload_file" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📼</span><span class="tool-name">Media.cm (Vidéo)</span></a>
+            <a href="https://drive.google.com/drive/starred" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⭐</span><span class="tool-name">Google Drive (Favoris)</span></a>
+        </div>
+    </div>
+
+    <!-- NOTES & OUTILS TEXTE -->
+    <div class="category">
+        <h2>📝 Notes & Outils Texte</h2>
+        <div class="grid">
+            <a href="https://notepad-online.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📝</span><span class="tool-name">Notepad Online</span></a>
+            <a href="https://pastebin.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📋</span><span class="tool-name">Pastebin</span></a>
+            <a href="https://rentry.co/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📄</span><span class="tool-name">Rentry</span></a>
+            <a href="https://katb.in/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🐱</span><span class="tool-name">Katb.in</span></a>
+            <a href="https://pastes.fmhy.net/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📑</span><span class="tool-name">Paste FMHY</span></a>
+            <a href="https://txtbin.org/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔐</span><span class="tool-name">TxtBin (Chiffré)</span></a>
+            <a href="https://privnote.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon"> 💣</span><span class="tool-name">Privnote (Auto-Destruct)</span></a>
+            <a href="https://itty.bitty.site/edit" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔗</span><span class="tool-name">Itty Bitty (Lien Perso)</span></a>
+            <a href="https://onlinetexttools.com/#tools" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🛠️</span><span class="tool-name">Online Text Tools</span></a>
+            <a href="https://www.textcleanr.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🧼</span><span class="tool-name">Text Cleanr</span></a>
         </div>
     </div>
 
@@ -213,6 +124,22 @@
         </div>
     </div>
 
+    <!-- UTILITAIRES -->
+    <div class="category">
+        <h2>🛠️ Utilitaires & Conversions</h2>
+        <div class="grid">
+            <a href="https://cloudconvert.com/epub-to-pdf" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📄</span><span class="tool-name">EPUB to PDF</span></a>
+            <a href="https://simplepdf.com/fr" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📕</span><span class="tool-name">SimplePDF (Éditeur)</span></a>
+            <a href="https://www.sejda.com/fr/pdf-editor" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📗</span><span class="tool-name">Sejda (Éditeur PDF)</span></a>
+            <a href="https://p2r3.github.io/convert/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔄</span><span class="tool-name">Multi-Convertisseur</span></a>
+            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🌍</span><span class="tool-name">DeepL (Traduction)</span></a>
+            <a href="https://www.editpad.org/tool/fr/caractere-invisible" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">👻</span><span class="tool-name">Caractère Invisible</span></a>
+            <a href="https://checkshorturl.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔎</span><span class="tool-name">Check Short URL</span></a>
+            <a href="https://www.speedtest.net/fr" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⚡</span><span class="tool-name">Speedtest</span></a>
+            <a href="https://ffmicalculator.org/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">💪</span><span class="tool-name">FFMI Calculator</span></a>
+        </div>
+    </div>
+
     <!-- GAMING -->
     <div class="category">
         <h2>🎮 Gaming</h2>
@@ -221,20 +148,18 @@
             <a href="https://www.youtube.com/watch?v=bYyHmRDvEPk" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⏰</span><span class="tool-name">Steam Idle Hours (Tuto)</span></a>
             <a href="https://www.youtube.com/watch?v=6AU34WOpD-4" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🏆</span><span class="tool-name">Steam Achievements (Tuto)</span></a>
             <a href="https://pokemon-awesome.vercel.app/pokemon" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔴</span><span class="tool-name">Pokédex Complet</span></a>
+            <a href="https://pokemonlist.netlify.app/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🟡</span><span class="tool-name">Pokémon Gen 1</span></a>
             <a href="https://www.pokellector.com/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🃏</span><span class="tool-name">Pokémon Cards</span></a>
+            <a href="https://www.scriptolab.com/minecraft-pixel-art-en.php" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⛏️</span><span class="tool-name">Minecraft Pixel Art</span></a>
         </div>
     </div>
 
-    <!-- UTILITAIRES -->
+    <!-- DEV, TECH & SOCIAL -->
     <div class="category">
-        <h2>🛠️ Utilitaires</h2>
+        <h2>⚙️ Dev, Tech & Social</h2>
         <div class="grid">
-            <a href="https://cloudconvert.com/epub-to-pdf" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📄</span><span class="tool-name">EPUB to PDF</span></a>
-            <a href="https://p2r3.github.io/convert/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🔄</span><span class="tool-name">Multi-Convertisseur</span></a>
-            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🌍</span><span class="tool-name">DeepL (Traduction)</span></a>
-            <a href="https://www.editpad.org/tool/fr/caractere-invisible" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">👻</span><span class="tool-name">Caractère Invisible</span></a>
-            <a href="https://www.speedtest.net/fr" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⚡</span><span class="tool-name">Speedtest</span></a>
-            <a href="https://ffmicalculator.org/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">💪</span><span class="tool-name">FFMI Calculator</span></a>
+            <a href="https://www.parse.bot/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">🤖</span><span class="tool-name">Parse.bot (Site to API)</span></a>
+            <a href="https://anothersocialpanel.com/new_order" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">📈</span><span class="tool-name">Social Panel (Boost Stats)</span></a>
         </div>
     </div>
 
@@ -257,6 +182,3 @@
             <a href="https://jacky-liang.github.io/age-timer/" target="_blank" rel="noopener noreferrer" class="tool-card"><span class="tool-icon">⏳</span><span class="tool-name">Age Timer</span></a>
         </div>
     </div>
-
-</body>
-</html>
