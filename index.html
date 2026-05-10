@@ -97,7 +97,7 @@
         /* Box FMHY qui brille */
         .featured-container {
             max-width: 600px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto 30px auto;
         }
         .featured-card {
             background: rgba(168, 161, 246, 0.1);
@@ -121,6 +121,19 @@
         .featured-text { text-align: left; }
         .featured-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 5px; }
         .featured-desc { font-size: 0.9rem; color: #d0cdf7; }
+
+        /* Conteneur pour les deux box Anime côte à côte */
+        .featured-flex-container {
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .featured-flex-container .featured-card {
+            flex: 1;
+            min-width: 280px;
+        }
 
         .category {
             margin-bottom: 50px;
@@ -260,6 +273,24 @@
         </a>
     </div>
 
+    <!-- LIENS ULTIMES ANIME/MANGA -->
+    <div class="featured-flex-container">
+        <a href="https://everythingmoe.com/" target="_blank" rel="noopener noreferrer" class="featured-card" data-desc="répertoire incroyable tout anime manga novel light novel">
+            <img src="https://www.google.com/s2/favicons?domain=everythingmoe.com&sz=64" alt="EM" class="featured-icon">
+            <div class="featured-text">
+                <div class="featured-title">EverythingMoe</div>
+                <div class="featured-desc">Le répertoire incroyable pour tout ce qui touche aux animes, mangas, novels, etc.</div>
+            </div>
+        </a>
+        <a href="https://theindex.moe/" target="_blank" rel="noopener noreferrer" class="featured-card" data-desc="annuaire complet index manga anime webtoon sources">
+            <img src="https://www.google.com/s2/favicons?domain=theindex.moe&sz=64" alt="TI" class="featured-icon">
+            <div class="featured-text">
+                <div class="featured-title">The Index Moe</div>
+                <div class="featured-desc">L'annuaire ultime pour retrouver toutes les sources liées au manga et anime.</div>
+            </div>
+        </a>
+    </div>
+
     <!-- ANONYMAT & MAIL -->
     <div class="category" data-category="Anonymat">
         <h2>🕵️ Anonymat & Mails</h2>
@@ -306,6 +337,7 @@
             <a href="https://nepu.to/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="streaming films séries vf vostfr"><img src="https://www.google.com/s2/favicons?domain=nepu.to&sz=64" alt="" class="tool-icon"><span class="tool-name">Nepu (Films/Séries)</span></a>
             <a href="https://www.wco.tv/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder cartoon dessin animé vf"><img src="https://www.google.com/s2/favicons?domain=wco.tv&sz=64" alt="" class="tool-icon"><span class="tool-name">WCO TV (Cartoons)</span></a>
             <a href="https://animepahe.pw/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder anime vf vostfr haute qualité"><img src="https://www.google.com/s2/favicons?domain=animepahe.pw&sz=64" alt="" class="tool-icon"><span class="tool-name">AnimePahe</span></a>
+            <a href="https://www.miruro.tv/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder anime vf vostfr streaming"><img src="https://www.google.com/s2/favicons?domain=www.miruro.tv&sz=64" alt="" class="tool-icon"><span class="tool-name">Miruro</span></a>
             <a href="https://mangadex.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lire manga scan traduction"><img src="https://www.google.com/s2/favicons?domain=mangadex.org&sz=64" alt="" class="tool-icon"><span class="tool-name">MangaDex</span></a>
             <a href="https://sushiscan.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="manga scan français"><img src="https://www.google.com/s2/favicons?domain=sushiscan.net&sz=64" alt="" class="tool-icon"><span class="tool-name">SushiScan</span></a>
             <a href="https://mangakatana.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lecture manga rapide"><img src="https://www.google.com/s2/favicons?domain=mangakatana.com&sz=64" alt="" class="tool-icon"><span class="tool-name">MangaKatana</span></a>
@@ -467,6 +499,7 @@
         const cards = document.querySelectorAll('.tool-card');
         const categories = document.querySelectorAll('.category');
         const featuredBox = document.querySelector('.featured-container');
+        const featuredFlexBox = document.querySelector('.featured-flex-container');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const backToTop = document.getElementById('backToTop');
 
@@ -477,8 +510,10 @@
             filterBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-filter="all"]').classList.add('active');
 
+            // Gérer la box FMHY
             if (term === '') {
                 featuredBox.classList.remove('hidden');
+                featuredFlexBox.classList.remove('hidden');
             } else {
                 const fmhyDesc = featuredBox.querySelector('.featured-card').getAttribute('data-desc').toLowerCase();
                 const fmhyTitle = featuredBox.querySelector('.featured-card').textContent.toLowerCase();
@@ -487,6 +522,16 @@
                 } else {
                     featuredBox.classList.add('hidden');
                 }
+
+                // Gérer les box Anime
+                let showAnimeBox = false;
+                featuredFlexBox.querySelectorAll('.featured-card').forEach(card => {
+                    const name = card.textContent.toLowerCase();
+                    const desc = card.getAttribute('data-desc').toLowerCase();
+                    if(name.includes(term) || desc.includes(term)) showAnimeBox = true;
+                });
+                if(showAnimeBox) featuredFlexBox.classList.remove('hidden');
+                else featuredFlexBox.classList.add('hidden');
             }
 
             categories.forEach(cat => cat.classList.remove('hidden'));
@@ -527,8 +572,14 @@
                     }
                 });
 
-                if(filter === 'all') featuredBox.classList.remove('hidden');
-                else featuredBox.classList.add('hidden');
+                // Afficher les box uniquement sur "Tous" ou "Streaming"
+                if(filter === 'all' || filter === 'Streaming') {
+                    featuredBox.classList.remove('hidden');
+                    featuredFlexBox.classList.remove('hidden');
+                } else {
+                    featuredBox.classList.add('hidden');
+                    featuredFlexBox.classList.add('hidden');
+                }
             });
         });
 
