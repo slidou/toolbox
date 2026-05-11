@@ -348,6 +348,7 @@
             <a href="https://z-library.sk/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger livres ebooks gratuits"><img src="https://www.google.com/s2/favicons?domain=z-library.sk&sz=64" alt="" class="tool-icon"><span class="tool-name">Z-Library</span></a>
             <a href="https://archive.org/details/books" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="livres anciens gratuits bibliothèque mondiale"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Internet Archive (Books)</span></a>
             <a href="https://www6.bookys-ebooks.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver ebooks livres numériques télécharger"><img src="https://www.google.com/s2/favicons?domain=www6.bookys-ebooks.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Bookys (Ebooks)</span></a>
+            <a href="https://fr.wikisource.org/wiki/Wikisource:Accueil" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque textes libres gratuits enrichir wikimedia"><img src="https://www.google.com/s2/favicons?domain=fr.wikisource.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Wikisource (Textes Libres)</span></a>
         </div>
     </div>
 
@@ -406,7 +407,7 @@
     <div class="category" data-category="Notes">
         <h2>📝 Notes & Outils Texte</h2>
         <div class="grid">
-            <a href="https://notepad-online.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bloc note en ligne rapide"><img src="https://www.google.com/s2/favicons?domain=notepad-online.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Notepad Online</span></a>
+            <a href="https://notepad-online.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bloc note en ligne rapide sauvegarde automatique navigateur"><img src="https://www.google.com/s2/favicons?domain=notepad-online.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Notepad Online</span></a>
             <a href="https://pastebin.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="partager texte code"><img src="https://www.google.com/s2/favicons?domain=pastebin.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Pastebin</span></a>
             <a href="https://rentry.co/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="créer page web simple markdown"><img src="https://www.google.com/s2/favicons?domain=rentry.co&sz=64" alt="" class="tool-icon"><span class="tool-name">Rentry</span></a>
             <a href="https://katb.in/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="coller texte partager"><img src="https://www.google.com/s2/favicons?domain=katb.in&sz=64" alt="" class="tool-icon"><span class="tool-name">Katb.in</span></a>
@@ -487,6 +488,7 @@
             <a href="https://web.archive.org/web/20151024173003/http://guillotine.voila.net:80/Palmares1871_1977.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="histoire france exécution capitale"><img src="https://www.google.com/s2/favicons?domain=web.archive.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Palmarès Exécutions</span></a>
             <a href="https://world-geography-games.com/world.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="apprendre géographie pays carte"><img src="https://www.google.com/s2/favicons?domain=world-geography-games.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Jeux de Géographie</span></a>
             <a href="https://jacky-liang.github.io/age-timer/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="chronomètre âge temps passé vie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><span class="tool-name">Age Timer</span></a>
+            <a href="https://grantkot.com/ll/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="physique simulation faire bouger masse chaîne"><img src="https://www.google.com/s2/favicons?domain=grantkot.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Locomass</span></a>
         </div>
     </div>
 
@@ -510,7 +512,6 @@
             filterBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-filter="all"]').classList.add('active');
 
-            // Gérer la box FMHY
             if (term === '') {
                 featuredBox.classList.remove('hidden');
                 featuredFlexBox.classList.remove('hidden');
@@ -523,7 +524,6 @@
                     featuredBox.classList.add('hidden');
                 }
 
-                // Gérer les box Anime
                 let showAnimeBox = false;
                 featuredFlexBox.querySelectorAll('.featured-card').forEach(card => {
                     const name = card.textContent.toLowerCase();
@@ -572,7 +572,6 @@
                     }
                 });
 
-                // Afficher les box uniquement sur "Tous" ou "Streaming"
                 if(filter === 'all' || filter === 'Streaming') {
                     featuredBox.classList.remove('hidden');
                     featuredFlexBox.classList.remove('hidden');
