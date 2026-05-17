@@ -6,7 +6,6 @@
     <title>Toolbox</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
     <style>
-        /* Fond dégradé moderne */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
@@ -24,7 +23,6 @@
             letter-spacing: 2px;
         }
 
-        /* Bouton Sauvegarde */
         #saveBtn {
             position: fixed;
             top: 20px;
@@ -47,193 +45,79 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Barre de recherche Glassmorphism */
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 20px auto;
-        }
+        .search-container { max-width: 600px; margin: 0 auto 20px auto; }
         .search-input {
-            width: 100%;
-            padding: 15px 25px;
-            border-radius: 30px;
+            width: 100%; padding: 15px 25px; border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: #ffffff;
-            font-size: 1rem;
-            outline: none;
-            box-sizing: border-box;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            color: #ffffff; font-size: 1rem; outline: none; box-sizing: border-box;
             transition: all 0.3s ease;
         }
         .search-input::placeholder { color: rgba(255, 255, 255, 0.4); }
         .search-input:focus { border-color: rgba(168, 161, 246, 0.5); box-shadow: 0 0 20px rgba(168, 161, 246, 0.2); }
 
-        /* Boutons de filtre rapide */
-        .filter-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
+        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
         .filter-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 8px 16px; border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
-            color: rgba(255,255,255,0.7);
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            font-family: inherit;
+            color: rgba(255,255,255,0.7); cursor: pointer;
+            font-size: 0.85rem; transition: all 0.3s ease; font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
             background: rgba(168, 161, 246, 0.2);
-            border-color: rgba(168, 161, 246, 0.5);
-            color: #fff;
+            border-color: rgba(168, 161, 246, 0.5); color: #fff;
         }
 
-        /* Box FMHY qui brille */
-        .featured-container {
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-        }
+        .featured-container { max-width: 600px; margin: 0 auto 30px auto; }
         .featured-card {
             background: rgba(168, 161, 246, 0.1);
             border: 1px solid rgba(168, 161, 246, 0.4);
-            padding: 25px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(168, 161, 246, 0.2);
+            padding: 25px; border-radius: 20px; text-decoration: none;
+            color: #ffffff; display: flex; align-items: center; gap: 20px;
+            transition: all 0.3s ease; box-shadow: 0 0 25px rgba(168, 161, 246, 0.2);
         }
-        .featured-card:hover {
-            background: rgba(168, 161, 246, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px rgba(168, 161, 246, 0.5);
-        }
+        .featured-card:hover { background: rgba(168, 161, 246, 0.2); transform: translateY(-5px); box-shadow: 0 0 40px rgba(168, 161, 246, 0.5); }
         .featured-icon { width: 50px; height: 50px; border-radius: 12px; }
         .featured-text { text-align: left; }
         .featured-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 5px; }
         .featured-desc { font-size: 0.9rem; color: #d0cdf7; }
 
-        /* Conteneur pour les deux box Anime côte à côte */
-        .featured-flex-container {
-            max-width: 1200px;
-            margin: 0 auto 60px auto;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .featured-flex-container .featured-card {
-            flex: 1;
-            min-width: 280px;
-        }
+        .featured-flex-container { max-width: 1200px; margin: 0 auto 60px auto; display: flex; gap: 20px; flex-wrap: wrap; }
+        .featured-flex-container .featured-card { flex: 1; min-width: 280px; }
 
-        .category {
-            margin-bottom: 50px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .category { margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+        .category h2 { font-size: 1.1rem; color: #a8a1f6; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; padding-left: 10px; border-left: 4px solid #a8a1f6; }
 
-        .category h2 {
-            font-size: 1.1rem;
-            color: #a8a1f6;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-            border-left: 4px solid #a8a1f6;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 
-        /* La grille qui s'adapte */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        /* Effet Glassmorphism pour les cartes */
         .tool-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px;
-            border-radius: 16px;
-            text-decoration: none;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            padding: 18px; border-radius: 16px; text-decoration: none; color: #ffffff;
+            display: flex; align-items: center; gap: 15px;
+            transition: all 0.3s ease; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
+        .tool-card:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.3); }
 
-        /* Effet de survol stylé */
-        .tool-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Style pour les vrais logos */
-        .tool-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            object-fit: contain;
-            background: rgba(255, 255, 255, 0.1);
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-            flex-shrink: 0;
-        }
+        .tool-icon { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: rgba(255, 255, 255, 0.1); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); flex-shrink: 0; }
         
-        .tool-name {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
+        .tool-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+        .tool-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-desc { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* Bouton Retour en haut */
         #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(168, 161, 246, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(168, 161, 246, 0.4);
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(168, 161, 246, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 161, 246, 0.4); color: white; font-size: 1.5rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
         }
-        #backToTop.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        #backToTop:hover {
-            background: rgba(168, 161, 246, 0.4);
-            transform: translateY(-3px);
-        }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: rgba(168, 161, 246, 0.4); transform: translateY(-3px); }
 
-        /* Classe pour cacher les éléments */
         .hidden { display: none !important; }
     </style>
 </head>
@@ -242,12 +126,10 @@
     <h1>🧰 Toolbox</h1>
     <button id="saveBtn" title="Télécharger le code du site">💾 Save Code</button>
 
-    <!-- BARRE DE RECHERCHE -->
     <div class="search-container">
         <input type="text" id="search" class="search-input" placeholder="Rechercher un outil (ex: image, musique, pdf...)">
     </div>
 
-    <!-- BOUTONS DE FILTRE RAPIDE -->
     <div class="filter-container">
         <button class="filter-btn active" data-filter="all">Tous</button>
         <button class="filter-btn" data-filter="Anonymat">🕵️ Anonymat</button>
@@ -262,7 +144,6 @@
         <button class="filter-btn" data-filter="IA">🧠 IA</button>
     </div>
 
-    <!-- LIEN ULTIME FMHY -->
     <div class="featured-container">
         <a href="https://fmhy.net/video" target="_blank" rel="noopener noreferrer" class="featured-card" data-desc="site ultime gratuit trouver films series streaming téléchargement">
             <img src="https://www.google.com/s2/favicons?domain=fmhy.net&sz=64" alt="FMHY" class="featured-icon">
@@ -273,7 +154,6 @@
         </a>
     </div>
 
-    <!-- LIENS ULTIMES ANIME/MANGA -->
     <div class="featured-flex-container">
         <a href="https://everythingmoe.com/" target="_blank" rel="noopener noreferrer" class="featured-card" data-desc="répertoire incroyable tout anime manga novel light novel">
             <img src="https://www.google.com/s2/favicons?domain=everythingmoe.com&sz=64" alt="EM" class="featured-icon">
@@ -295,15 +175,15 @@
     <div class="category" data-category="Anonymat">
         <h2>🕵️ Anonymat & Mails</h2>
         <div class="grid">
-            <a href="https://anonyig.com/en/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="voir story instagram sans compte anonymement"><img src="https://www.google.com/s2/favicons?domain=anonyig.com&sz=64" alt="" class="tool-icon"><span class="tool-name">IG Story Viewer</span></a>
-            <a href="https://www.emailnator.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mail jetable temporaire"><img src="https://www.google.com/s2/favicons?domain=emailnator.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Emailnator (Temp)</span></a>
-            <a href="https://altaddress.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mail permanent sans inscription"><img src="https://www.google.com/s2/favicons?domain=altaddress.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Alt Address (Permanent)</span></a>
-            <a href="https://www.mailfreeonline.com/free-anonymous-email" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="envoyer email sans montrer son adresse"><img src="https://www.google.com/s2/favicons?domain=mailfreeonline.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Mail Anonyme</span></a>
-            <a href="https://proton.me/mail" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mail chiffré sécurisé aucune trace"><img src="https://www.google.com/s2/favicons?domain=proton.me&sz=64" alt="" class="tool-icon"><span class="tool-name">ProtonMail</span></a>
-            <a href="https://temporarynumber.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="recevoir sms numéro jetable"><img src="https://www.google.com/s2/favicons?domain=temporarynumber.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Numéro Temporaire</span></a>
-            <a href="https://www.tempemail.cc/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="boite mail temporaire"><img src="https://www.google.com/s2/favicons?domain=tempemail.cc&sz=64" alt="" class="tool-icon"><span class="tool-name">TempMail CC</span></a>
-            <a href="https://www.receivesmsonline.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="recevoir sms en ligne gratuit"><img src="https://www.google.com/s2/favicons?domain=receivesmsonline.net&sz=64" alt="" class="tool-icon"><span class="tool-name">Receive SMS Online</span></a>
-            <a href="https://protonvpn.com/fr/pricing" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="vpn gratuit sécurisé changer ip"><img src="https://www.google.com/s2/favicons?domain=protonvpn.com&sz=64" alt="" class="tool-icon"><span class="tool-name">ProtonVPN</span></a>
+            <a href="https://anonyig.com/en/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="voir story instagram sans compte anonymement"><img src="https://www.google.com/s2/favicons?domain=anonyig.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">IG Story Viewer</span><span class="tool-desc">Stories anonymes</span></div></a>
+            <a href="https://www.emailnator.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mail jetable temporaire"><img src="https://www.google.com/s2/favicons?domain=emailnator.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Emailnator (Temp)</span><span class="tool-desc">Mail temporaire</span></div></a>
+            <a href="https://altaddress.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mail permanent sans inscription"><img src="https://www.google.com/s2/favicons?domain=altaddress.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Alt Address</span><span class="tool-desc">Mail permanent</span></div></a>
+            <a href="https://www.mailfreeonline.com/free-anonymous-email" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="envoyer email sans montrer son adresse"><img src="https://www.google.com/s2/favicons?domain=mailfreeonline.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Mail Anonyme</span><span class="tool-desc">Envoyer anonymement</span></div></a>
+            <a href="https://proton.me/mail" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mail chiffré sécurisé aucune trace"><img src="https://www.google.com/s2/favicons?domain=proton.me&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">ProtonMail</span><span class="tool-desc">Aucune trace</span></div></a>
+            <a href="https://temporarynumber.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="recevoir sms numéro jetable"><img src="https://www.google.com/s2/favicons?domain=temporarynumber.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Numéro Temporaire</span><span class="tool-desc">SMS jetable</span></div></a>
+            <a href="https://www.tempemail.cc/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="boite mail temporaire"><img src="https://www.google.com/s2/favicons?domain=tempemail.cc&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">TempMail CC</span><span class="tool-desc">Boite temporaire</span></div></a>
+            <a href="https://www.receivesmsonline.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="recevoir sms en ligne gratuit"><img src="https://www.google.com/s2/favicons?domain=receivesmsonline.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Receive SMS Online</span><span class="tool-desc">SMS en ligne</span></div></a>
+            <a href="https://protonvpn.com/fr/pricing" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="vpn gratuit sécurisé changer ip"><img src="https://www.google.com/s2/favicons?domain=protonvpn.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">ProtonVPN</span><span class="tool-desc">VPN sécurisé</span></div></a>
         </div>
     </div>
 
@@ -311,21 +191,21 @@
     <div class="category" data-category="Téléchargement">
         <h2>⬇️ Téléchargement</h2>
         <div class="grid">
-            <a href="https://oneforalldownloader.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo depuis n'importe quel site"><img src="https://www.google.com/s2/favicons?domain=oneforalldownloader.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Multi Downloader</span></a>
-            <a href="https://amp4.cc/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo youtube"><img src="https://www.google.com/s2/favicons?domain=amp4.cc&sz=64" alt="" class="tool-icon"><span class="tool-name">YT DL (Amp4)</span></a>
-            <a href="https://ytmp3.net.in/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="extraire audio mp3 youtube"><img src="https://www.google.com/s2/favicons?domain=ytmp3.net.in&sz=64" alt="" class="tool-icon"><span class="tool-name">YT to MP3</span></a>
-            <a href="https://cnvmp3.com/v42" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir youtube mp3"><img src="https://www.google.com/s2/favicons?domain=cnvmp3.com&sz=64" alt="" class="tool-icon"><span class="tool-name">YT MP3 (CNV)</span></a>
-            <a href="https://vidssave.com/fr/yt" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder vidéo youtube"><img src="https://www.google.com/s2/favicons?domain=vidssave.com&sz=64" alt="" class="tool-icon"><span class="tool-name">YT DL (Vidssave)</span></a>
-            <a href="https://downsub.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger sous-titres vidéo"><img src="https://www.google.com/s2/favicons?domain=downsub.com&sz=64" alt="" class="tool-icon"><span class="tool-name">DL Sous-titres (Downsub)</span></a>
-            <a href="https://www.downloadyoutubesubtitles.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="extraire sous titres youtube"><img src="https://www.google.com/s2/favicons?domain=downloadyoutubesubtitles.com&sz=64" alt="" class="tool-icon"><span class="tool-name">DL Sous-titres (YT)</span></a>
-            <a href="https://www.locoloader.com/bilibili-video-downloader/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo bilibili"><img src="https://www.google.com/s2/favicons?domain=locoloader.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Bilibili DL (Loco)</span></a>
-            <a href="https://snapany.com/bilibili" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder bilibili"><img src="https://www.google.com/s2/favicons?domain=snapany.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Bilibili DL (Snapany)</span></a>
-            <a href="https://bravedown.com/vk-video-downloader" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger video vkontakte"><img src="https://www.google.com/s2/favicons?domain=bravedown.com&sz=64" alt="" class="tool-icon"><span class="tool-name">VK DL (Brave)</span></a>
-            <a href="https://www.downloadvideosfrom.com/VK.php" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="ripper video vk"><img src="https://www.google.com/s2/favicons?domain=downloadvideosfrom.com&sz=64" alt="" class="tool-icon"><span class="tool-name">VK DL (DVF)</span></a>
-            <a href="https://videodler.com/fr/fetch" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder vidéo twitter x"><img src="https://www.google.com/s2/favicons?domain=videodler.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Twitter Video DL</span></a>
-            <a href="https://sssinstagram.com/fr/video-downloader" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo reel instagram"><img src="https://www.google.com/s2/favicons?domain=sssinstagram.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Instagram Video DL</span></a>
-            <a href="https://monochrome.samidy.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger album musique entier"><img src="https://www.google.com/s2/favicons?domain=samidy.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Albums DL (Monochrome)</span></a>
-            <a href="https://lucida.to/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger musique spotify mp3"><img src="https://www.google.com/s2/favicons?domain=lucida.to&sz=64" alt="" class="tool-icon"><span class="tool-name">Lucida (DL Spotify)</span></a>
+            <a href="https://oneforalldownloader.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo depuis n'importe quel site"><img src="https://www.google.com/s2/favicons?domain=oneforalldownloader.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Multi Downloader</span><span class="tool-desc">DL multi-sites</span></div></a>
+            <a href="https://amp4.cc/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo youtube"><img src="https://www.google.com/s2/favicons?domain=amp4.cc&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">YT DL (Amp4)</span><span class="tool-desc">Vidéos YouTube</span></div></a>
+            <a href="https://ytmp3.net.in/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="extraire audio mp3 youtube"><img src="https://www.google.com/s2/favicons?domain=ytmp3.net.in&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">YT to MP3</span><span class="tool-desc">Audio YouTube</span></div></a>
+            <a href="https://cnvmp3.com/v42" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir youtube mp3"><img src="https://www.google.com/s2/favicons?domain=cnvmp3.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">YT MP3 (CNV)</span><span class="tool-desc">Convertir YT</span></div></a>
+            <a href="https://vidssave.com/fr/yt" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder vidéo youtube"><img src="https://www.google.com/s2/favicons?domain=vidssave.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">YT DL (Vidssave)</span><span class="tool-desc">Sauvegarde YT</span></div></a>
+            <a href="https://downsub.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger sous-titres vidéo"><img src="https://www.google.com/s2/favicons?domain=downsub.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">DL Sous-titres (Downsub)</span><span class="tool-desc">Extraire sous-titres</span></div></a>
+            <a href="https://www.downloadyoutubesubtitles.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="extraire sous titres youtube"><img src="https://www.google.com/s2/favicons?domain=downloadyoutubesubtitles.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">DL Sous-titres (YT)</span><span class="tool-desc">Sous-titres YT</span></div></a>
+            <a href="https://www.locoloader.com/bilibili-video-downloader/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo bilibili"><img src="https://www.google.com/s2/favicons?domain=locoloader.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Bilibili DL (Loco)</span><span class="tool-desc">Vidéos Bilibili</span></div></a>
+            <a href="https://snapany.com/bilibili" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder bilibili"><img src="https://www.google.com/s2/favicons?domain=snapany.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Bilibili DL (Snapany)</span><span class="tool-desc">Rip Bilibili</span></div></a>
+            <a href="https://bravedown.com/vk-video-downloader" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger video vkontakte"><img src="https://www.google.com/s2/favicons?domain=bravedown.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">VK DL (Brave)</span><span class="tool-desc">Vidéos VK</span></div></a>
+            <a href="https://www.downloadvideosfrom.com/VK.php" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="ripper video vk"><img src="https://www.google.com/s2/favicons?domain=downloadvideosfrom.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">VK DL (DVF)</span><span class="tool-desc">Rip VK</span></div></a>
+            <a href="https://videodler.com/fr/fetch" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder vidéo twitter x"><img src="https://www.google.com/s2/favicons?domain=videodler.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Twitter Video DL</span><span class="tool-desc">Vidéos Twitter</span></div></a>
+            <a href="https://sssinstagram.com/fr/video-downloader" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger vidéo reel instagram"><img src="https://www.google.com/s2/favicons?domain=sssinstagram.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Instagram Video DL</span><span class="tool-desc">Vidéos Instagram</span></div></a>
+            <a href="https://monochrome.samidy.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger album musique entier"><img src="https://www.google.com/s2/favicons?domain=samidy.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Albums DL (Monochrome)</span><span class="tool-desc">Albums complets</span></div></a>
+            <a href="https://lucida.to/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger musique spotify mp3"><img src="https://www.google.com/s2/favicons?domain=lucida.to&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Lucida (DL Spotify)</span><span class="tool-desc">Musiques Spotify</span></div></a>
         </div>
     </div>
 
@@ -333,23 +213,25 @@
     <div class="category" data-category="Streaming">
         <h2>🍿 Streaming & Lectures</h2>
         <div class="grid">
-            <a href="https://70millimetres.fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="cinéma gratuit streaming légal arte france tv"><img src="https://www.google.com/s2/favicons?domain=70millimetres.fr&sz=64" alt="" class="tool-icon"><span class="tool-name">70 Millimètres</span></a>
-            <a href="https://thoughtmaybe.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="streaming documentaires société politique écologie critique pensée radicale"><img src="https://www.google.com/s2/favicons?domain=thoughtmaybe.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Thought Maybe</span></a>
-            <a href="https://nepu.to/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="streaming films séries vf vostfr"><img src="https://www.google.com/s2/favicons?domain=nepu.to&sz=64" alt="" class="tool-icon"><span class="tool-name">Nepu (Films/Séries)</span></a>
-            <a href="https://www.wco.tv/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder cartoon dessin animé vf"><img src="https://www.google.com/s2/favicons?domain=wco.tv&sz=64" alt="" class="tool-icon"><span class="tool-name">WCO TV (Cartoons)</span></a>
-            <a href="https://animepahe.pw/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder anime vf vostfr haute qualité"><img src="https://www.google.com/s2/favicons?domain=animepahe.pw&sz=64" alt="" class="tool-icon"><span class="tool-name">AnimePahe</span></a>
-            <a href="https://www.miruro.tv/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder anime vf vostfr streaming"><img src="https://www.google.com/s2/favicons?domain=www.miruro.tv&sz=64" alt="" class="tool-icon"><span class="tool-name">Miruro</span></a>
-            <a href="https://mangadex.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lire manga scan traduction"><img src="https://www.google.com/s2/favicons?domain=mangadex.org&sz=64" alt="" class="tool-icon"><span class="tool-name">MangaDex</span></a>
-            <a href="https://sushiscan.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="manga scan français"><img src="https://www.google.com/s2/favicons?domain=sushiscan.net&sz=64" alt="" class="tool-icon"><span class="tool-name">SushiScan</span></a>
-            <a href="https://mangakatana.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lecture manga rapide"><img src="https://www.google.com/s2/favicons?domain=mangakatana.com&sz=64" alt="" class="tool-icon"><span class="tool-name">MangaKatana</span></a>
-            <a href="https://www.webtoon.xyz/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lire webtoon en ligne"><img src="https://www.google.com/s2/favicons?domain=webtoon.xyz&sz=64" alt="" class="tool-icon"><span class="tool-name">Webtoon XYZ</span></a>
-            <a href="https://weebcentral.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="webtoon manga scanlation"><img src="https://www.google.com/s2/favicons?domain=weebcentral.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Weeb Central</span></a>
-            <a href="https://toonily.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="webtoon anglais traduit"><img src="https://www.google.com/s2/favicons?domain=toonily.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Toonily</span></a>
-            <a href="https://annas-archive.gl/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque livres gratuits pdf epub"><img src="https://www.google.com/s2/favicons?domain=annas-archive.gl&sz=64" alt="" class="tool-icon"><span class="tool-name">Anna's Archive</span></a>
-            <a href="https://z-library.sk/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger livres ebooks gratuits"><img src="https://www.google.com/s2/favicons?domain=z-library.sk&sz=64" alt="" class="tool-icon"><span class="tool-name">Z-Library</span></a>
-            <a href="https://archive.org/details/books" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="livres anciens gratuits bibliothèque mondiale"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Internet Archive (Books)</span></a>
-            <a href="https://www6.bookys-ebooks.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver ebooks livres numériques télécharger"><img src="https://www.google.com/s2/favicons?domain=www6.bookys-ebooks.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Bookys (Ebooks)</span></a>
-            <a href="https://fr.wikisource.org/wiki/Wikisource:Accueil" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque textes libres gratuits enrichir wikimedia"><img src="https://www.google.com/s2/favicons?domain=fr.wikisource.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Wikisource (Textes Libres)</span></a>
+            <a href="https://70millimetres.fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="cinéma gratuit streaming légal arte france tv"><img src="https://www.google.com/s2/favicons?domain=70millimetres.fr&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">70 Millimètres</span><span class="tool-desc">Streaming légal</span></div></a>
+            <a href="https://thoughtmaybe.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="streaming documentaires société politique écologie critique pensée radicale"><img src="https://www.google.com/s2/favicons?domain=thoughtmaybe.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Thought Maybe</span><span class="tool-desc">Docs radicaux</span></div></a>
+            <a href="https://nepu.to/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="streaming films séries"><img src="https://www.google.com/s2/favicons?domain=nepu.to&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Nepu (Films/Séries)</span><span class="tool-desc">Films/Séries</span></div></a>
+            <a href="https://www.wco.tv/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder cartoon dessin animé"><img src="https://www.google.com/s2/favicons?domain=wco.tv&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">WCO TV (Cartoons)</span><span class="tool-desc">Cartoons</span></div></a>
+            <a href="https://animepahe.pw/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder anime haute qualité"><img src="https://www.google.com/s2/favicons?domain=animepahe.pw&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">AnimePahe</span><span class="tool-desc">Anime HQ</span></div></a>
+            <a href="https://www.miruro.tv/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="regarder anime streaming"><img src="https://www.google.com/s2/favicons?domain=www.miruro.tv&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Miruro</span><span class="tool-desc">Streaming Anime</span></div></a>
+            <a href="https://mangadex.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lire manga scan traduction"><img src="https://www.google.com/s2/favicons?domain=mangadex.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">MangaDex</span><span class="tool-desc">Scans traduits</span></div></a>
+            <a href="https://sushiscan.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="manga scan français"><img src="https://www.google.com/s2/favicons?domain=sushiscan.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">SushiScan</span><span class="tool-desc">Manga FR</span></div></a>
+            <a href="https://mangakatana.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lecture manga rapide"><img src="https://www.google.com/s2/favicons?domain=mangakatana.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">MangaKatana</span><span class="tool-desc">Lecture rapide</span></div></a>
+            <a href="https://www.webtoon.xyz/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="lire webtoon en ligne"><img src="https://www.google.com/s2/favicons?domain=webtoon.xyz&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Webtoon XYZ</span><span class="tool-desc">Webtoons en ligne</span></div></a>
+            <a href="https://weebcentral.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="webtoon manga scanlation"><img src="https://www.google.com/s2/favicons?domain=weebcentral.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Weeb Central</span><span class="tool-desc">Scans Webtoon</span></div></a>
+            <a href="https://toonily.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="webtoon anglais traduit"><img src="https://www.google.com/s2/favicons?domain=toonily.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Toonily</span><span class="tool-desc">Webtoons EN</span></div></a>
+            <a href="https://annas-archive.gl/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque livres gratuits pdf epub"><img src="https://www.google.com/s2/favicons?domain=annas-archive.gl&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Anna's Archive</span><span class="tool-desc">Livres gratuits</span></div></a>
+            <a href="https://z-library.sk/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="télécharger livres ebooks gratuits"><img src="https://www.google.com/s2/favicons?domain=z-library.sk&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Z-Library</span><span class="tool-desc">Ebooks gratuits</span></div></a>
+            <a href="https://archive.org/details/books" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="livres anciens gratuits bibliothèque mondiale"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Internet Archive</span><span class="tool-desc">Bibliothèque mondiale</span></div></a>
+            <a href="https://www6.bookys-ebooks.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver ebooks livres numériques télécharger"><img src="https://www.google.com/s2/favicons?domain=www6.bookys-ebooks.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Bookys (Ebooks)</span><span class="tool-desc">Ebooks divers</span></div></a>
+            <a href="https://fr.wikisource.org/wiki/Wikisource:Accueil" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque textes libres gratuits enrichir wikimedia"><img src="https://www.google.com/s2/favicons?domain=fr.wikisource.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Wikisource</span><span class="tool-desc">Textes libres</span></div></a>
+            <a href="https://gutenberg.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="70000 livres classiques gratuits litterature"><img src="https://www.google.com/s2/favicons?domain=gutenberg.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Gutenberg</span><span class="tool-desc">Livres classiques</span></div></a>
+            <a href="https://pdfdrive.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="téléchargements pdf gratuits ebooks"><img src="https://www.google.com/s2/favicons?domain=pdfdrive.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">PDF Drive</span><span class="tool-desc">PDF gratuits</span></div></a>
         </div>
     </div>
 
@@ -357,12 +239,13 @@
     <div class="category" data-category="Musique">
         <h2>🎵 Musique & Chill</h2>
         <div class="grid">
-            <a href="https://chillhop.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique rap chill lofi étudier"><img src="https://www.google.com/s2/favicons?domain=chillhop.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Chillhop</span></a>
-            <a href="https://www.lofi.cafe/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique lofi café détente"><img src="https://www.google.com/s2/favicons?domain=lofi.cafe&sz=64" alt="" class="tool-icon"><span class="tool-name">Lofi Cafe</span></a>
-            <a href="https://www.cityhop.cafe/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique conduite ville ambiance"><img src="https://www.google.com/s2/favicons?domain=cityhop.cafe&sz=64" alt="" class="tool-icon"><span class="tool-name">Cityhop (Drive + Music)</span></a>
-            <a href="https://www.rainymood.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bruit pluie relaxation dormir"><img src="https://www.google.com/s2/favicons?domain=rainymood.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Rainy Mood</span></a>
-            <a href="https://thatguyedd.github.io/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="balade japon ambiance musique asie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><span class="tool-name">Balade Japon + Music</span></a>
-            <a href="https://www.flowfi.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique concentration fond d'écran timer pomodoro"><img src="https://www.google.com/s2/favicons?domain=flowfi.app&sz=64" alt="" class="tool-icon"><span class="tool-name">Flowfi (Chill + Timer)</span></a>
+            <a href="https://chillhop.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique rap chill lofi étudier"><img src="https://www.google.com/s2/favicons?domain=chillhop.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Chillhop</span><span class="tool-desc">Rap / Chill</span></div></a>
+            <a href="https://www.lofi.cafe/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique lofi café détente"><img src="https://www.google.com/s2/favicons?domain=lofi.cafe&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Lofi Cafe</span><span class="tool-desc">Détente Lofi</span></div></a>
+            <a href="https://www.cityhop.cafe/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique conduite ville ambiance"><img src="https://www.google.com/s2/favicons?domain=cityhop.cafe&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Cityhop</span><span class="tool-desc">Ambiance conduite</span></div></a>
+            <a href="https://www.rainymood.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bruit pluie relaxation dormir"><img src="https://www.google.com/s2/favicons?domain=rainymood.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Rainy Mood</span><span class="tool-desc">Bruit de pluie</span></div></a>
+            <a href="https://thatguyedd.github.io/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="balade japon ambiance musique asie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Balade Japon</span><span class="tool-desc">Walk Japonais</span></div></a>
+            <a href="https://www.flowfi.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique concentration fond d'écran timer pomodoro"><img src="https://www.google.com/s2/favicons?domain=flowfi.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Flowfi</span><span class="tool-desc">Timer concentration</span></div></a>
+            <a href="https://radio.garden/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="écouter station radio monde globe terrestre"><img src="https://www.google.com/s2/favicons?domain=radio.garden&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Radio Garden</span><span class="tool-desc">Radios du monde</span></div></a>
         </div>
     </div>
 
@@ -370,21 +253,24 @@
     <div class="category" data-category="Images">
         <h2>🖼️ Images & Émojis</h2>
         <div class="grid">
-            <a href="https://8mb.video/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="compresser vidéo discord limite poids"><img src="https://www.google.com/s2/favicons?domain=8mb.video&sz=64" alt="" class="tool-icon"><span class="tool-name">Compressor (Discord 8MB)</span></a>
-            <a href="https://imageclipboard.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="emoji nitro discord gratuit"><img src="https://www.google.com/s2/favicons?domain=imageclipboard.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Émojis Nitro (Gratuits)</span></a>
-            <a href="https://emojipedia.org/symbols" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="signes symboles emoji copier coller"><img src="https://www.google.com/s2/favicons?domain=emojipedia.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Emojipedia Symbols</span></a>
-            <a href="https://saucenao.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver source image reverse search"><img src="https://www.google.com/s2/favicons?domain=saucenao.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Reverse Image Search</span></a>
-            <a href="https://icon-sets.iconify.design/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque massive icônes svg sets"><img src="https://www.google.com/s2/favicons?domain=icon-sets.iconify.design&sz=64" alt="" class="tool-icon"><span class="tool-name">Iconify (Icon Sets)</span></a>
-            <a href="https://icon-icons.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque icônes ico"><img src="https://www.google.com/s2/favicons?domain=icon-icons.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Icônes (Icon-Icons)</span></a>
-            <a href="https://www.iconsdb.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="icone format ico png"><img src="https://www.google.com/s2/favicons?domain=iconsdb.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Icônes (IconsDB)</span></a>
-            <a href="https://film-grab.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="capture écran film cinéma hd"><img src="https://www.google.com/s2/favicons?domain=film-grab.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Film Screens</span></a>
-            <a href="https://www.animgifmoji.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="transformer gif en emoji sticker"><img src="https://www.google.com/s2/favicons?domain=animgifmoji.com&sz=64" alt="" class="tool-icon"><span class="tool-name">GIF to Émoji</span></a>
-            <a href="https://pixel-converter.ameniwa.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir image pixel art retro"><img src="https://www.google.com/s2/favicons?domain=ameniwa.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Image to Pixel Art</span></a>
-            <a href="https://safebooru.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="recherche image anime manga safe"><img src="https://www.google.com/s2/favicons?domain=safebooru.org&sz=64" alt="" class="tool-icon"><span class="tool-name">SafeBooru (Anime)</span></a>
-            <a href="https://photomosh.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="effet glitch image lumineux"><img src="https://www.google.com/s2/favicons?domain=photomosh.com&sz=64" alt="" class="tool-icon"><span class="tool-name">PhotoMosh (Effets Glitch)</span></a>
-            <a href="https://cleanup.pictures/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="supprimer objet personne image"><img src="https://www.google.com/s2/favicons?domain=cleanup.pictures&sz=64" alt="" class="tool-icon"><span class="tool-name">Cleanup (Suppr. Élément)</span></a>
-            <a href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="enlever fond photo transparent"><img src="https://www.google.com/s2/favicons?domain=remove.bg&sz=64" alt="" class="tool-icon"><span class="tool-name">Remove.bg (Suppr. Fond)</span></a>
-            <a href="https://unlimited.waifu2x.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="agrandir image augmenter résolution upscale"><img src="https://www.google.com/s2/favicons?domain=waifu2x.net&sz=64" alt="" class="tool-icon"><span class="tool-name">Waifu2x (Upscale x2)</span></a>
+            <a href="https://8mb.video/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="compresser vidéo discord limite poids"><img src="https://www.google.com/s2/favicons?domain=8mb.video&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Compressor</span><span class="tool-desc">Compresser vidéo</span></div></a>
+            <a href="https://imageclipboard.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="emoji nitro discord gratuit"><img src="https://www.google.com/s2/favicons?domain=imageclipboard.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Émojis Nitro</span><span class="tool-desc">Emojis Discord</span></div></a>
+            <a href="https://emojipedia.org/symbols" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="signes symboles emoji copier coller"><img src="https://www.google.com/s2/favicons?domain=emojipedia.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Emojipedia</span><span class="tool-desc">Symboles/Emojis</span></div></a>
+            <a href="https://saucenao.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver source image reverse search"><img src="https://www.google.com/s2/favicons?domain=saucenao.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Reverse Image</span><span class="tool-desc">Trouver la source</span></div></a>
+            <a href="https://icon-sets.iconify.design/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque massive icônes svg sets"><img src="https://www.google.com/s2/favicons?domain=icon-sets.iconify.design&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Iconify</span><span class="tool-desc">Icônes SVG</span></div></a>
+            <a href="https://icon-icons.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque icônes ico"><img src="https://www.google.com/s2/favicons?domain=icon-icons.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Icon-Icons</span><span class="tool-desc">Icônes .ico</span></div></a>
+            <a href="https://www.iconsdb.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="icone format ico png"><img src="https://www.google.com/s2/favicons?domain=iconsdb.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">IconsDB</span><span class="tool-desc">Icônes .png</span></div></a>
+            <a href="https://film-grab.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="capture écran film cinéma hd"><img src="https://www.google.com/s2/favicons?domain=film-grab.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Film Screens</span><span class="tool-desc">Screens HD Films</span></div></a>
+            <a href="https://www.animgifmoji.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="transformer gif en emoji sticker"><img src="https://www.google.com/s2/favicons?domain=animgifmoji.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">GIF to Émoji</span><span class="tool-desc">GIF en sticker</span></div></a>
+            <a href="https://pixel-converter.ameniwa.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir image pixel art retro"><img src="https://www.google.com/s2/favicons?domain=ameniwa.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Image to Pixel Art</span><span class="tool-desc">Convertir pixel</span></div></a>
+            <a href="https://safebooru.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="recherche image anime manga safe"><img src="https://www.google.com/s2/favicons?domain=safebooru.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">SafeBooru</span><span class="tool-desc">Images Anime Safe</span></div></a>
+            <a href="https://photomosh.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="effet glitch image lumineux"><img src="https://www.google.com/s2/favicons?domain=photomosh.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">PhotoMosh</span><span class="tool-desc">Effets Glitch</span></div></a>
+            <a href="https://cleanup.pictures/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="supprimer objet personne image"><img src="https://www.google.com/s2/favicons?domain=cleanup.pictures&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Cleanup</span><span class="tool-desc">Supprimer objet</span></div></a>
+            <a href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="enlever fond photo transparent"><img src="https://www.google.com/s2/favicons?domain=remove.bg&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Remove.bg</span><span class="tool-desc">Enlever fond</span></div></a>
+            <a href="https://unlimited.waifu2x.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="agrandir image augmenter résolution upscale"><img src="https://www.google.com/s2/favicons?domain=waifu2x.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Waifu2x</span><span class="tool-desc">Upscale Image</span></div></a>
+            <a href="https://photopea.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="photoshop gratuit dans le navigateur retouche image"><img src="https://www.google.com/s2/favicons?domain=photopea.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Photopea</span><span class="tool-desc">Photoshop gratuit</span></div></a>
+            <a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="compresser gratuitement n'importe quelle image poids"><img src="https://www.google.com/s2/favicons?domain=squoosh.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Squoosh</span><span class="tool-desc">Compresser image</span></div></a>
+            <a href="https://unscreen.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="supprimer arrière plan vidéo gratuitement fond"><img src="https://www.google.com/s2/favicons?domain=unscreen.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Unscreen</span><span class="tool-desc">Suppr. fond vidéo</span></div></a>
         </div>
     </div>
 
@@ -392,15 +278,16 @@
     <div class="category" data-category="Hébergement">
         <h2>☁️ Hébergement & Upload</h2>
         <div class="grid">
-            <a href="https://www.zupimages.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger image en ligne"><img src="https://www.google.com/s2/favicons?domain=zupimages.net&sz=64" alt="" class="tool-icon"><span class="tool-name">Zupimages</span></a>
-            <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload image gratuit"><img src="https://www.google.com/s2/favicons?domain=imgbb.com&sz=64" alt="" class="tool-icon"><span class="tool-name">ImgBB</span></a>
-            <a href="https://catbox.moe/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger fichier lourd 200mb"><img src="https://www.google.com/s2/favicons?domain=catbox.moe&sz=64" alt="" class="tool-icon"><span class="tool-name">Catbox (200MB)</span></a>
-            <a href="https://hexload.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="envoyer fichier cloud"><img src="https://www.google.com/s2/favicons?domain=hexload.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Hexload</span></a>
-            <a href="https://gofile.io/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="stockage fichier gratuit"><img src="https://www.google.com/s2/favicons?domain=gofile.io&sz=64" alt="" class="tool-icon"><span class="tool-name">GoFile</span></a>
-            <a href="https://new.fileditch.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload rapide fichier"><img src="https://www.google.com/s2/favicons?domain=fileditch.com&sz=64" alt="" class="tool-icon"><span class="tool-name">FileDitch</span></a>
-            <a href="https://streamtape.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger vidéo streaming"><img src="https://www.google.com/s2/favicons?domain=streamtape.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Streamtape (Vidéo)</span></a>
-            <a href="https://media.cm/?op=upload_file" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload vidéo"><img src="https://www.google.com/s2/favicons?domain=media.cm&sz=64" alt="" class="tool-icon"><span class="tool-name">Media.cm (Vidéo)</span></a>
-            <a href="https://drive.google.com/drive/starred" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mes fichiers favoris google drive"><img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Google Drive (Favoris)</span></a>
+            <a href="https://www.zupimages.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger image en ligne"><img src="https://www.google.com/s2/favicons?domain=zupimages.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Zupimages</span><span class="tool-desc">Héberger image</span></div></a>
+            <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload image gratuit"><img src="https://www.google.com/s2/favicons?domain=imgbb.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">ImgBB</span><span class="tool-desc">Upload image</span></div></a>
+            <a href="https://catbox.moe/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger fichier lourd 200mb"><img src="https://www.google.com/s2/favicons?domain=catbox.moe&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Catbox</span><span class="tool-desc">Fichiers lourds</span></div></a>
+            <a href="https://hexload.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="envoyer fichier cloud"><img src="https://www.google.com/s2/favicons?domain=hexload.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Hexload</span><span class="tool-desc">Envoi cloud</span></div></a>
+            <a href="https://gofile.io/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="stockage fichier gratuit"><img src="https://www.google.com/s2/favicons?domain=gofile.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">GoFile</span><span class="tool-desc">Stockage gratuit</span></div></a>
+            <a href="https://new.fileditch.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload rapide fichier"><img src="https://www.google.com/s2/favicons?domain=fileditch.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">FileDitch</span><span class="tool-desc">Upload rapide</span></div></a>
+            <a href="https://streamtape.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger vidéo streaming"><img src="https://www.google.com/s2/favicons?domain=streamtape.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Streamtape</span><span class="tool-desc">Héberger vidéo</span></div></a>
+            <a href="https://media.cm/?op=upload_file" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload vidéo"><img src="https://www.google.com/s2/favicons?domain=media.cm&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Media.cm</span><span class="tool-desc">Upload vidéo</span></div></a>
+            <a href="https://drive.google.com/drive/starred" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mes fichiers favoris google drive"><img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Google Drive</span><span class="tool-desc">Mes favoris</span></div></a>
+            <a href="https://file.io" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="partager fichiers auto suppression disparition"><img src="https://www.google.com/s2/favicons?domain=file.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">File.io</span><span class="tool-desc">Fichier éphémère</span></div></a>
         </div>
     </div>
 
@@ -408,17 +295,17 @@
     <div class="category" data-category="Notes">
         <h2>📝 Notes & Outils Texte</h2>
         <div class="grid">
-            <a href="https://notepad-online.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bloc note en ligne rapide sauvegarde automatique navigateur"><img src="https://www.google.com/s2/favicons?domain=notepad-online.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Notepad Online</span></a>
-            <a href="https://pastebin.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="partager texte code"><img src="https://www.google.com/s2/favicons?domain=pastebin.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Pastebin</span></a>
-            <a href="https://rentry.co/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="créer page web simple markdown"><img src="https://www.google.com/s2/favicons?domain=rentry.co&sz=64" alt="" class="tool-icon"><span class="tool-name">Rentry</span></a>
-            <a href="https://katb.in/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="coller texte partager"><img src="https://www.google.com/s2/favicons?domain=katb.in&sz=64" alt="" class="tool-icon"><span class="tool-name">Katb.in</span></a>
-            <a href="https://pastes.fmhy.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="pasteboard texte"><img src="https://www.google.com/s2/favicons?domain=fmhy.net&sz=64" alt="" class="tool-icon"><span class="tool-name">Paste FMHY</span></a>
-            <a href="https://txtbin.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="message chiffré crypté"><img src="https://www.google.com/s2/favicons?domain=txtbin.org&sz=64" alt="" class="tool-icon"><span class="tool-name">TxtBin (Chiffré)</span></a>
-            <a href="https://privnote.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="message auto destructible secret"><img src="https://www.google.com/s2/favicons?domain=privnote.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Privnote (Auto-Destruct)</span></a>
-            <a href="https://itty.bitty.site/edit" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="créer lien miniature message"><img src="https://www.google.com/s2/favicons?domain=bitty.site&sz=64" alt="" class="tool-icon"><span class="tool-name">Itty Bitty (Lien Perso)</span></a>
-            <a href="https://onlinetexttools.com/#tools" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="outils manipulation texte majuscule minuscule"><img src="https://www.google.com/s2/favicons?domain=onlinetexttools.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Online Text Tools</span></a>
-            <a href="https://www.textcleanr.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="nettoyer formatage texte copié"><img src="https://www.google.com/s2/favicons?domain=textcleanr.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Text Cleanr</span></a>
-            <a href="https://docs.fileverse.io/document/edZTq25hVnTuzW14TjpSRa" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="document texte partagé en ligne collaboration"><img src="https://www.google.com/s2/favicons?domain=fileverse.io&sz=64" alt="" class="tool-icon"><span class="tool-name">Fileverse (Doc Partagé)</span></a>
+            <a href="https://notepad-online.com/fr/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bloc note en ligne rapide sauvegarde automatique navigateur"><img src="https://www.google.com/s2/favicons?domain=notepad-online.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Notepad Online</span><span class="tool-desc">Sauvegarde auto</span></div></a>
+            <a href="https://pastebin.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="partager texte code"><img src="https://www.google.com/s2/favicons?domain=pastebin.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pastebin</span><span class="tool-desc">Partager texte</span></div></a>
+            <a href="https://rentry.co/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="créer page web simple markdown"><img src="https://www.google.com/s2/favicons?domain=rentry.co&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Rentry</span><span class="tool-desc">Page Markdown</span></div></a>
+            <a href="https://katb.in/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="coller texte partager"><img src="https://www.google.com/s2/favicons?domain=katb.in&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Katb.in</span><span class="tool-desc">Coller texte</span></div></a>
+            <a href="https://pastes.fmhy.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="pasteboard texte"><img src="https://www.google.com/s2/favicons?domain=fmhy.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Paste FMHY</span><span class="tool-desc">Pasteboard</span></div></a>
+            <a href="https://txtbin.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="message chiffré crypté"><img src="https://www.google.com/s2/favicons?domain=txtbin.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">TxtBin</span><span class="tool-desc">Texte chiffré</span></div></a>
+            <a href="https://privnote.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="message auto destructible secret"><img src="https://www.google.com/s2/favicons?domain=privnote.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Privnote</span><span class="tool-desc">Auto-destruction</span></div></a>
+            <a href="https://itty.bitty.site/edit" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="créer lien miniature message"><img src="https://www.google.com/s2/favicons?domain=bitty.site&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Itty Bitty</span><span class="tool-desc">Lien miniature</span></div></a>
+            <a href="https://onlinetexttools.com/#tools" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="outils manipulation texte majuscule minuscule"><img src="https://www.google.com/s2/favicons?domain=onlinetexttools.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Online Text Tools</span><span class="tool-desc">Outils texte</span></div></a>
+            <a href="https://www.textcleanr.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="nettoyer formatage texte copié"><img src="https://www.google.com/s2/favicons?domain=textcleanr.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Text Cleanr</span><span class="tool-desc">Nettoyer formatage</span></div></a>
+            <a href="https://docs.fileverse.io/document/edZTq25hVnTuzW14TjpSRa" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="document texte partagé en ligne collaboration"><img src="https://www.google.com/s2/favicons?domain=fileverse.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Fileverse</span><span class="tool-desc">Doc partagé</span></div></a>
         </div>
     </div>
 
@@ -426,11 +313,11 @@
     <div class="category" data-category="Software">
         <h2>💻 Software & Sécurité</h2>
         <div class="grid">
-            <a href="https://github.com/mrpond/BlockTheSpot" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bloquer publicité spotify pc"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Block Spotify Ads</span></a>
-            <a href="http://www.spotmybackup.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder playlist spotify"><img src="https://www.google.com/s2/favicons?domain=spotmybackup.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Spotify Backup</span></a>
-            <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="analyser fichier virus malware"><img src="https://www.google.com/s2/favicons?domain=virustotal.com&sz=64" alt="" class="tool-icon"><span class="tool-name">VirusTotal</span></a>
-            <a href="https://localtubemanager.pages.dev/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="youtube sans compte sans connexion"><img src="https://www.google.com/s2/favicons?domain=pages.dev&sz=64" alt="" class="tool-icon"><span class="tool-name">Local YouTube (No Login)</span></a>
-            <a href="https://fr.bignox.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="émulateur android jeux applications pc"><img src="https://www.google.com/s2/favicons?domain=bignox.com&sz=64" alt="" class="tool-icon"><span class="tool-name">NoxPlayer (BigNox)</span></a>
+            <a href="https://github.com/mrpond/BlockTheSpot" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bloquer publicité spotify pc"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Block Spotify Ads</span><span class="tool-desc">Enlever pubs Spotify</span></div></a>
+            <a href="http://www.spotmybackup.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder playlist spotify"><img src="https://www.google.com/s2/favicons?domain=spotmybackup.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Spotify Backup</span><span class="tool-desc">Sauvegarder playlists</span></div></a>
+            <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="analyser fichier virus malware"><img src="https://www.google.com/s2/favicons?domain=virustotal.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">VirusTotal</span><span class="tool-desc">Scanner fichiers</span></div></a>
+            <a href="https://localtubemanager.pages.dev/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="youtube sans compte sans connexion"><img src="https://www.google.com/s2/favicons?domain=pages.dev&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Local YouTube</span><span class="tool-desc">YT sans compte</span></div></a>
+            <a href="https://fr.bignox.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="émulateur android jeux applications pc"><img src="https://www.google.com/s2/favicons?domain=bignox.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">NoxPlayer</span><span class="tool-desc">Émulateur Android</span></div></a>
         </div>
     </div>
 
@@ -438,15 +325,19 @@
     <div class="category" data-category="Utilitaires">
         <h2>🛠️ Utilitaires & Conversions</h2>
         <div class="grid">
-            <a href="https://cloudconvert.com/epub-to-pdf" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir ebook livre numérique"><img src="https://www.google.com/s2/favicons?domain=cloudconvert.com&sz=64" alt="" class="tool-icon"><span class="tool-name">EPUB to PDF</span></a>
-            <a href="https://simplepdf.com/fr" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="éditer pdf modifier texte"><img src="https://www.google.com/s2/favicons?domain=simplepdf.com&sz=64" alt="" class="tool-icon"><span class="tool-name">SimplePDF (Éditeur)</span></a>
-            <a href="https://www.sejda.com/fr/pdf-editor" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="modifier pdf ajouter image signature"><img src="https://www.google.com/s2/favicons?domain=sejda.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Sejda (Éditeur PDF)</span></a>
-            <a href="https://p2r3.github.io/convert/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir format fichier"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><span class="tool-name">Multi-Convertisseur</span></a>
-            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="traduire texte langue ia"><img src="https://www.google.com/s2/favicons?domain=deepl.com&sz=64" alt="" class="tool-icon"><span class="tool-name">DeepL (Traduction)</span></a>
-            <a href="https://www.editpad.org/tool/fr/caractere-invisible" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="copier caractère vide espace"><img src="https://www.google.com/s2/favicons?domain=editpad.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Caractère Invisible</span></a>
-            <a href="https://checkshorturl.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="dévoiler lien raccourci url vraie destination"><img src="https://www.google.com/s2/favicons?domain=checkshorturl.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Check Short URL</span></a>
-            <a href="https://www.speedtest.net/fr" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="test vitesse connexion internet débit"><img src="https://www.google.com/s2/favicons?domain=speedtest.net&sz=64" alt="" class="tool-icon"><span class="tool-name">Speedtest</span></a>
-            <a href="https://ffmicalculator.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="calculer masse musculaire salle de sport"><img src="https://www.google.com/s2/favicons?domain=ffmicalculator.org&sz=64" alt="" class="tool-icon"><span class="tool-name">FFMI Calculator</span></a>
+            <a href="https://cloudconvert.com/epub-to-pdf" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir ebook livre numérique"><img src="https://www.google.com/s2/favicons?domain=cloudconvert.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">EPUB to PDF</span><span class="tool-desc">Convertir ebook</span></div></a>
+            <a href="https://simplepdf.com/fr" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="éditer pdf modifier texte"><img src="https://www.google.com/s2/favicons?domain=simplepdf.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">SimplePDF</span><span class="tool-desc">Éditer PDF</span></div></a>
+            <a href="https://www.sejda.com/fr/pdf-editor" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="modifier pdf ajouter image signature"><img src="https://www.google.com/s2/favicons?domain=sejda.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Sejda</span><span class="tool-desc">Modifier PDF</span></div></a>
+            <a href="https://p2r3.github.io/convert/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="convertir format fichier"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Multi-Convertisseur</span><span class="tool-desc">Convertir fichiers</span></div></a>
+            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="traduire texte langue ia"><img src="https://www.google.com/s2/favicons?domain=deepl.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">DeepL</span><span class="tool-desc">Traduction IA</span></div></a>
+            <a href="https://www.editpad.org/tool/fr/caractere-invisible" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="copier caractère vide espace"><img src="https://www.google.com/s2/favicons?domain=editpad.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Caractère Invisible</span><span class="tool-desc">Espace vide</span></div></a>
+            <a href="https://checkshorturl.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="dévoiler lien raccourci url vraie destination"><img src="https://www.google.com/s2/favicons?domain=checkshorturl.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Check Short URL</span><span class="tool-desc">Dévoiler lien</span></div></a>
+            <a href="https://www.speedtest.net/fr" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="test vitesse connexion internet débit"><img src="https://www.google.com/s2/favicons?domain=speedtest.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Speedtest</span><span class="tool-desc">Test connexion</span></div></a>
+            <a href="https://ffmicalculator.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="calculer masse musculaire salle de sport"><img src="https://www.google.com/s2/favicons?domain=ffmicalculator.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">FFMI Calculator</span><span class="tool-desc">Masse musculaire</span></div></a>
+            <a href="https://wolframalpha.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résoudre instantanément problème maths calculs"><img src="https://www.google.com/s2/favicons?domain=wolframalpha.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Wolfram Alpha</span><span class="tool-desc">Calculs avancés</span></div></a>
+            <a href="https://archive.ph/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder page web pour toujours capture"><img src="https://www.google.com/s2/favicons?domain=archive.ph&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Archive.ph</span><span class="tool-desc">Sauvegarder page</span></div></a>
+            <a href="https://downdetector.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="vérifier site web panne serveur indisponible"><img src="https://www.google.com/s2/favicons?domain=downdetector.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Downdetector</span><span class="tool-desc">Panne de sites</span></div></a>
+            <a href="https://ilovepdf.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="fusionner diviser pdf outils traitement"><img src="https://www.google.com/s2/favicons?domain=ilovepdf.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">iLovePDF</span><span class="tool-desc">Fusionner/diviser</span></div></a>
         </div>
     </div>
 
@@ -454,14 +345,14 @@
     <div class="category" data-category="Gaming">
         <h2>🎮 Gaming</h2>
         <div class="grid">
-            <a href="https://github.com/steamnerds/userscripts" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="organiser ranger jeux steam"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Steam Stack/Unstack</span></a>
-            <a href="https://www.youtube.com/watch?v=bYyHmRDvEPk" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="augmenter heures jeu steam idler"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Steam Idle Hours (Tuto)</span></a>
-            <a href="https://www.youtube.com/watch?v=6AU34WOpD-4" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="débloquer succès steam achievement unlocker"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Steam Achievements (Tuto)</span></a>
-            <a href="https://pokemon-awesome.vercel.app/pokemon" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="liste tous pokémon pokédex"><img src="https://www.google.com/s2/favicons?domain=vercel.app&sz=64" alt="" class="tool-icon"><span class="tool-name">Pokédex Complet</span></a>
-            <a href="https://pokemonlist.netlify.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="pokémon première génération 151"><img src="https://www.google.com/s2/favicons?domain=netlify.app&sz=64" alt="" class="tool-icon"><span class="tool-name">Pokémon Gen 1</span></a>
-            <a href="https://www.pokellector.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="collection cartes pokemon"><img src="https://www.google.com/s2/favicons?domain=pokellector.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Pokémon Cards</span></a>
-            <a href="https://www.scriptolab.com/minecraft-pixel-art-en.php" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="générateur plan pixel art minecraft"><img src="https://www.google.com/s2/favicons?domain=scriptolab.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Minecraft Pixel Art</span></a>
-            <a href="https://sega-play.online/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="émulateur jeux sega mega drive genesis master system en ligne"><img src="https://www.google.com/s2/favicons?domain=sega-play.online&sz=64" alt="" class="tool-icon"><span class="tool-name">Sega Play Online</span></a>
+            <a href="https://github.com/steamnerds/userscripts" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="organiser ranger jeux steam"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Stack</span><span class="tool-desc">Organiser Steam</span></div></a>
+            <a href="https://www.youtube.com/watch?v=bYyHmRDvEPk" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="augmenter heures jeu steam idler"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Idle Hours</span><span class="tool-desc">Heures de jeu</span></div></a>
+            <a href="https://www.youtube.com/watch?v=6AU34WOpD-4" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="débloquer succès steam achievement unlocker"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Achievements</span><span class="tool-desc">Débloquer succès</span></div></a>
+            <a href="https://pokemon-awesome.vercel.app/pokemon" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="liste tous pokémon pokédex"><img src="https://www.google.com/s2/favicons?domain=vercel.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokédex Complet</span><span class="tool-desc">Tous les Pokémon</span></div></a>
+            <a href="https://pokemonlist.netlify.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="pokémon première génération 151"><img src="https://www.google.com/s2/favicons?domain=netlify.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokémon Gen 1</span><span class="tool-desc">151 premiers</span></div></a>
+            <a href="https://www.pokellector.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="collection cartes pokemon"><img src="https://www.google.com/s2/favicons?domain=pokellector.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokémon Cards</span><span class="tool-desc">Cartes à jouer</span></div></a>
+            <a href="https://www.scriptolab.com/minecraft-pixel-art-en.php" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="générateur plan pixel art minecraft"><img src="https://www.google.com/s2/favicons?domain=scriptolab.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Minecraft Pixel Art</span><span class="tool-desc">Plans Minecraft</span></div></a>
+            <a href="https://sega-play.online/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="émulateur jeux sega mega drive genesis master system en ligne"><img src="https://www.google.com/s2/favicons?domain=sega-play.online&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Sega Play Online</span><span class="tool-desc">Émulateur Sega</span></div></a>
         </div>
     </div>
 
@@ -469,8 +360,8 @@
     <div class="category" data-category="Dev">
         <h2>⚙️ Dev, Tech & Social</h2>
         <div class="grid">
-            <a href="https://www.parse.bot/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="transformer site web api scraper développeur"><img src="https://www.google.com/s2/favicons?domain=parse.bot&sz=64" alt="" class="tool-icon"><span class="tool-name">Parse.bot (Site to API)</span></a>
-            <a href="https://anothersocialpanel.com/new_order" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="augmenter abonnés likes vues statistiques"><img src="https://www.google.com/s2/favicons?domain=anothersocialpanel.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Social Panel (Boost Stats)</span></a>
+            <a href="https://www.parse.bot/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="transformer site web api scraper développeur"><img src="https://www.google.com/s2/favicons?domain=parse.bot&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Parse.bot</span><span class="tool-desc">Site vers API</span></div></a>
+            <a href="https://anothersocialpanel.com/new_order" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="augmenter abonnés likes vues statistiques"><img src="https://www.google.com/s2/favicons?domain=anothersocialpanel.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Social Panel</span><span class="tool-desc">Boost stats</span></div></a>
         </div>
     </div>
 
@@ -478,10 +369,11 @@
     <div class="category" data-category="IA">
         <h2>🧠 IA & Recherche</h2>
         <div class="grid">
-            <a href="https://chat.z.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="ia ultra performante pour coder gratuite"><img src="https://www.google.com/s2/favicons?domain=z.ai&sz=64" alt="" class="tool-icon"><span class="tool-name">Z.AI</span></a>
-            <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="moteur recherche intelligence artificielle sources"><img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64" alt="" class="tool-icon"><span class="tool-name">Perplexity AI</span></a>
-            <a href="https://notebooklm.google.com/notebook/f52081b7-75e1-40e5-ba1c-c577d9019d78" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéo livre document ia google"><img src="https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=64" alt="" class="tool-icon"><span class="tool-name">NotebookLM (Résumés)</span></a>
-            <a href="https://www.are.na/consumer-aesthetics-research-institute/channels" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="inspiration design artistique moodboard"><img src="https://www.google.com/s2/favicons?domain=are.na&sz=64" alt="" class="tool-icon"><span class="tool-name">Inspiration Artistique</span></a>
+            <a href="https://chat.z.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="ia ultra performante pour coder gratuite"><img src="https://www.google.com/s2/favicons?domain=z.ai&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Z.AI</span><span class="tool-desc">IA pour coder</span></div></a>
+            <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="moteur recherche intelligence artificielle sources"><img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Perplexity AI</span><span class="tool-desc">Recherche IA</span></div></a>
+            <a href="https://notebooklm.google.com/notebook/f52081b7-75e1-40e5-ba1c-c577d9019d78" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéo livre document ia google"><img src="https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">NotebookLM</span><span class="tool-desc">Résumer vidéos/livres</span></div></a>
+            <a href="https://www.are.na/consumer-aesthetics-research-institute/channels" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="inspiration design artistique moodboard"><img src="https://www.google.com/s2/favicons?domain=are.na&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Inspiration Artistique</span><span class="tool-desc">Moodboard design</span></div></a>
+            <a href="https://summarize.tech" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéo youtube automatiquement"><img src="https://www.google.com/s2/favicons?domain=summarize.tech&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Summarize.tech</span><span class="tool-desc">Résumer vidéos</span></div></a>
         </div>
     </div>
 
@@ -489,18 +381,16 @@
     <div class="category" data-category="Divers">
         <h2>🗂️ Divers & Curiosités</h2>
         <div class="grid">
-            <a href="https://web.archive.org/web/20151024173003/http://guillotine.voila.net:80/Palmares1871_1977.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="histoire france exécution capitale"><img src="https://www.google.com/s2/favicons?domain=web.archive.org&sz=64" alt="" class="tool-icon"><span class="tool-name">Palmarès Exécutions</span></a>
-            <a href="https://world-geography-games.com/world.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="apprendre géographie pays carte"><img src="https://www.google.com/s2/favicons?domain=world-geography-games.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Jeux de Géographie</span></a>
-            <a href="https://jacky-liang.github.io/age-timer/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="chronomètre âge temps passé vie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><span class="tool-name">Age Timer</span></a>
-            <a href="https://grantkot.com/ll/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="physique simulation faire bouger masse chaîne"><img src="https://www.google.com/s2/favicons?domain=grantkot.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Locomass</span></a>
-            <a href="https://www.jetpunk.com/quizzes/pays-du-monde" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="quiz pays géographie monde deviner nom"><img src="https://www.google.com/s2/favicons?domain=jetpunk.com&sz=64" alt="" class="tool-icon"><span class="tool-name">Jetpunk (Pays du Monde)</span></a>
+            <a href="https://web.archive.org/web/20151024173003/http://guillotine.voila.net:80/Palmares1871_1977.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="histoire france exécution capitale"><img src="https://www.google.com/s2/favicons?domain=web.archive.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Palmarès Exécutions</span><span class="tool-desc">Histoire France</span></div></a>
+            <a href="https://world-geography-games.com/world.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="apprendre géographie pays carte"><img src="https://www.google.com/s2/favicons?domain=world-geography-games.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Jeux de Géographie</span><span class="tool-desc">Apprendre cartes</span></div></a>
+            <a href="https://jacky-liang.github.io/age-timer/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="chronomètre âge temps passé vie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Age Timer</span><span class="tool-desc">Chronomètre de vie</span></div></a>
+            <a href="https://grantkot.com/ll/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="physique simulation faire bouger masse chaîne"><img src="https://www.google.com/s2/favicons?domain=grantkot.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Locomass</span><span class="tool-desc">Simulation physique</span></div></a>
+            <a href="https://www.jetpunk.com/quizzes/pays-du-monde" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="quiz pays géographie monde deviner nom"><img src="https://www.google.com/s2/favicons?domain=jetpunk.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Jetpunk</span><span class="tool-desc">Quiz pays du monde</span></div></a>
         </div>
     </div>
 
-    <!-- BOUTON RETOUR EN HAUT -->
     <button id="backToTop">↑</button>
 
-    <!-- SCRIPTS -->
     <script>
         const searchInput = document.getElementById('search');
         const cards = document.querySelectorAll('.tool-card');
@@ -510,10 +400,8 @@
         const filterBtns = document.querySelectorAll('.filter-btn');
         const backToTop = document.getElementById('backToTop');
 
-        // 1. Gestion de la Recherche
         searchInput.addEventListener('input', function(e) {
             const term = e.target.value.toLowerCase();
-            
             filterBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-filter="all"]').classList.add('active');
 
@@ -523,11 +411,8 @@
             } else {
                 const fmhyDesc = featuredBox.querySelector('.featured-card').getAttribute('data-desc').toLowerCase();
                 const fmhyTitle = featuredBox.querySelector('.featured-card').textContent.toLowerCase();
-                if (fmhyTitle.includes(term) || fmhyDesc.includes(term)) {
-                    featuredBox.classList.remove('hidden');
-                } else {
-                    featuredBox.classList.add('hidden');
-                }
+                if (fmhyTitle.includes(term) || fmhyDesc.includes(term)) featuredBox.classList.remove('hidden');
+                else featuredBox.classList.add('hidden');
 
                 let showAnimeBox = false;
                 featuredFlexBox.querySelectorAll('.featured-card').forEach(card => {
@@ -543,38 +428,26 @@
             cards.forEach(card => {
                 const name = card.textContent.toLowerCase();
                 const desc = card.getAttribute('data-desc').toLowerCase();
-                
-                if (name.includes(term) || desc.includes(term)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                if (name.includes(term) || desc.includes(term)) card.classList.remove('hidden');
+                else card.classList.add('hidden');
             });
 
             categories.forEach(cat => {
                 const visibleCards = cat.querySelectorAll('.tool-card:not(.hidden)');
-                if (visibleCards.length === 0) {
-                    cat.classList.add('hidden');
-                }
+                if (visibleCards.length === 0) cat.classList.add('hidden');
             });
         });
 
-        // 2. Gestion des Filtres Rapides
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 searchInput.value = '';
-                
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const filter = btn.getAttribute('data-filter');
 
                 categories.forEach(cat => {
-                    if (filter === 'all' || cat.getAttribute('data-category') === filter) {
-                        cat.classList.remove('hidden');
-                    } else {
-                        cat.classList.add('hidden');
-                    }
+                    if (filter === 'all' || cat.getAttribute('data-category') === filter) cat.classList.remove('hidden');
+                    else cat.classList.add('hidden');
                 });
 
                 if(filter === 'all' || filter === 'Streaming') {
@@ -587,13 +460,9 @@
             });
         });
 
-        // 3. Gestion du Bouton Retour en Haut
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
+            if (window.scrollY > 300) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
         });
 
         backToTop.addEventListener('click', () => {
@@ -601,7 +470,6 @@
             setTimeout(() => searchInput.focus(), 500); 
         });
 
-        // 4. Bouton de sauvegarde du code
         document.getElementById('saveBtn').addEventListener('click', () => {
             const htmlContent = document.documentElement.outerHTML;
             const blob = new Blob([htmlContent], { type: 'text/html' });
