@@ -45,7 +45,7 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .search-container { max-width: 600px; margin: 0 auto 20px auto; }
+        .search-container { max-width: 600px; margin: 0 auto 20px auto; position: relative; }
         .search-input {
             width: 100%; padding: 15px 25px; border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -56,6 +56,13 @@
         }
         .search-input::placeholder { color: rgba(255, 255, 255, 0.4); }
         .search-input:focus { border-color: rgba(168, 161, 246, 0.5); box-shadow: 0 0 20px rgba(168, 161, 246, 0.2); }
+        .search-shortcut {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px; padding: 2px 8px; font-size: 0.75rem; color: rgba(255,255,255,0.3);
+            pointer-events: none; transition: opacity 0.2s;
+        }
+        .search-input:focus ~ .search-shortcut { opacity: 0; }
 
         .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
         .filter-btn {
@@ -70,7 +77,7 @@
             border-color: rgba(168, 161, 246, 0.5); color: #fff;
         }
 
-        .featured-container { max-width: 600px; margin: 0 auto 30px auto; }
+        .featured-container { max-width: 600px; margin: 0 auto 30px auto; opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease; }
         .featured-card {
             background: rgba(168, 161, 246, 0.1);
             border: 1px solid rgba(168, 161, 246, 0.4);
@@ -84,11 +91,12 @@
         .featured-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 5px; }
         .featured-desc { font-size: 0.9rem; color: #d0cdf7; }
 
-        .featured-flex-container { max-width: 1200px; margin: 0 auto 60px auto; display: flex; gap: 20px; flex-wrap: wrap; }
+        .featured-flex-container { max-width: 1200px; margin: 0 auto 60px auto; display: flex; gap: 20px; flex-wrap: wrap; opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease; }
         .featured-flex-container .featured-card { flex: 1; min-width: 280px; }
 
-        .category { margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
-        .category h2 { font-size: 1.1rem; color: #a8a1f6; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; padding-left: 10px; border-left: 4px solid #a8a1f6; }
+        .category { margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease; }
+        .category h2 { font-size: 1.1rem; color: #a8a1f6; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; padding-left: 10px; border-left: 4px solid #a8a1f6; display: flex; align-items: baseline; gap: 10px; }
+        .tool-count { font-size: 0.75rem; color: rgba(168, 161, 246, 0.5); font-weight: 400; letter-spacing: 0; text-transform: none; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 
@@ -108,6 +116,15 @@
         .tool-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .tool-desc { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+        .no-results {
+            text-align: center; padding: 80px 20px;
+            opacity: 0; transform: translateY(8px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .no-results-emoji { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
+        .no-results-text { font-size: 1.1rem; color: rgba(255,255,255,0.4); }
+        #noResultsTerm { color: rgba(168, 161, 246, 0.8); font-weight: 500; }
+
         #backToTop {
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%;
             background: rgba(168, 161, 246, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -117,8 +134,6 @@
         }
         #backToTop.show { opacity: 1; visibility: visible; }
         #backToTop:hover { background: rgba(168, 161, 246, 0.4); transform: translateY(-3px); }
-
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -128,6 +143,7 @@
 
     <div class="search-container">
         <input type="text" id="search" class="search-input" placeholder="Rechercher un outil (ex: image, musique, pdf...)">
+        <span class="search-shortcut">/</span>
     </div>
 
     <div class="filter-container">
@@ -139,9 +155,12 @@
         <button class="filter-btn" data-filter="Images">🖼️ Images</button>
         <button class="filter-btn" data-filter="Hébergement">☁️ Upload</button>
         <button class="filter-btn" data-filter="Notes">📝 Notes</button>
+        <button class="filter-btn" data-filter="Software">💻 Software</button>
         <button class="filter-btn" data-filter="Utilitaires">🛠️ Utilitaires</button>
         <button class="filter-btn" data-filter="Gaming">🎮 Gaming</button>
+        <button class="filter-btn" data-filter="Dev">⚙️ Dev</button>
         <button class="filter-btn" data-filter="IA">🧠 IA</button>
+        <button class="filter-btn" data-filter="Divers">🗂️ Divers</button>
     </div>
 
     <div class="featured-container">
@@ -169,6 +188,11 @@
                 <div class="featured-desc">L'annuaire ultime pour retrouver toutes les sources liées au manga et anime.</div>
             </div>
         </a>
+    </div>
+
+    <div id="noResults" class="no-results" style="display:none;">
+        <div class="no-results-emoji">🔍</div>
+        <div class="no-results-text">Aucun outil trouvé pour « <span id="noResultsTerm"></span> »</div>
     </div>
 
     <!-- ANONYMAT & MAIL -->
@@ -230,7 +254,7 @@
             <a href="https://archive.org/details/books" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="livres anciens gratuits bibliothèque mondiale"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Internet Archive</span><span class="tool-desc">Bibliothèque mondiale</span></div></a>
             <a href="https://www6.bookys-ebooks.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver ebooks livres numériques télécharger"><img src="https://www.google.com/s2/favicons?domain=www6.bookys-ebooks.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Bookys (Ebooks)</span><span class="tool-desc">Ebooks divers</span></div></a>
             <a href="https://fr.wikisource.org/wiki/Wikisource:Accueil" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="bibliothèque textes libres gratuits enrichir wikimedia"><img src="https://www.google.com/s2/favicons?domain=fr.wikisource.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Wikisource</span><span class="tool-desc">Textes libres</span></div></a>
-            <a href="https://gutenberg.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="70000 livres classiques gratuits litterature"><img src="https://www.google.com/s2/favicons?domain=gutenberg.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Gutenberg</span><span class="tool-desc">Livres classiques</span></div></a>
+            <a href="https://gutenberg.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="70000 livres classiques gratuits"><img src="https://www.google.com/s2/favicons?domain=gutenberg.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Gutenberg</span><span class="tool-desc">Livres classiques</span></div></a>
             <a href="https://pdfdrive.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="téléchargements pdf gratuits ebooks"><img src="https://www.google.com/s2/favicons?domain=pdfdrive.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">PDF Drive</span><span class="tool-desc">PDF gratuits</span></div></a>
         </div>
     </div>
@@ -246,6 +270,7 @@
             <a href="https://thatguyedd.github.io/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="balade japon ambiance musique asie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Balade Japon</span><span class="tool-desc">Walk Japonais</span></div></a>
             <a href="https://www.flowfi.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="musique concentration fond d'écran timer pomodoro"><img src="https://www.google.com/s2/favicons?domain=flowfi.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Flowfi</span><span class="tool-desc">Timer concentration</span></div></a>
             <a href="https://radio.garden/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="écouter station radio monde globe terrestre"><img src="https://www.google.com/s2/favicons?domain=radio.garden&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Radio Garden</span><span class="tool-desc">Radios du monde</span></div></a>
+            <a href="https://aniplaylist.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="trouver chansons animes spotify apple music deezer"><img src="https://www.google.com/s2/favicons?domain=aniplaylist.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">AniPlaylist</span><span class="tool-desc">Musiques Animes</span></div></a>
         </div>
     </div>
 
@@ -268,9 +293,10 @@
             <a href="https://cleanup.pictures/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="supprimer objet personne image"><img src="https://www.google.com/s2/favicons?domain=cleanup.pictures&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Cleanup</span><span class="tool-desc">Supprimer objet</span></div></a>
             <a href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="enlever fond photo transparent"><img src="https://www.google.com/s2/favicons?domain=remove.bg&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Remove.bg</span><span class="tool-desc">Enlever fond</span></div></a>
             <a href="https://unlimited.waifu2x.net/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="agrandir image augmenter résolution upscale"><img src="https://www.google.com/s2/favicons?domain=waifu2x.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Waifu2x</span><span class="tool-desc">Upscale Image</span></div></a>
-            <a href="https://photopea.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="photoshop gratuit dans le navigateur retouche image"><img src="https://www.google.com/s2/favicons?domain=photopea.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Photopea</span><span class="tool-desc">Photoshop gratuit</span></div></a>
-            <a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="compresser gratuitement n'importe quelle image poids"><img src="https://www.google.com/s2/favicons?domain=squoosh.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Squoosh</span><span class="tool-desc">Compresser image</span></div></a>
-            <a href="https://unscreen.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="supprimer arrière plan vidéo gratuitement fond"><img src="https://www.google.com/s2/favicons?domain=unscreen.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Unscreen</span><span class="tool-desc">Suppr. fond vidéo</span></div></a>
+            <a href="https://photopea.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="photoshop gratuit navigateur retouche image"><img src="https://www.google.com/s2/favicons?domain=photopea.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Photopea</span><span class="tool-desc">Photoshop gratuit</span></div></a>
+            <a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="compresser gratuitement n'importe quelle image"><img src="https://www.google.com/s2/favicons?domain=squoosh.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Squoosh</span><span class="tool-desc">Compresser image</span></div></a>
+            <a href="https://unscreen.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="supprimer arrière plan vidéo"><img src="https://www.google.com/s2/favicons?domain=unscreen.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Unscreen</span><span class="tool-desc">Suppr. fond vidéo</span></div></a>
+            <a href="https://thisanimedoesnotexist.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="images animes mangas générées ia"><img src="https://www.google.com/s2/favicons?domain=thisanimedoesnotexist.ai&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">ThisAnimeDoesNotExist</span><span class="tool-desc">Images IA Anime</span></div></a>
         </div>
     </div>
 
@@ -287,7 +313,7 @@
             <a href="https://streamtape.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger vidéo streaming"><img src="https://www.google.com/s2/favicons?domain=streamtape.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Streamtape</span><span class="tool-desc">Héberger vidéo</span></div></a>
             <a href="https://media.cm/?op=upload_file" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="upload vidéo"><img src="https://www.google.com/s2/favicons?domain=media.cm&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Media.cm</span><span class="tool-desc">Upload vidéo</span></div></a>
             <a href="https://drive.google.com/drive/starred" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mes fichiers favoris google drive"><img src="https://www.google.com/s2/favicons?domain=drive.google.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Google Drive</span><span class="tool-desc">Mes favoris</span></div></a>
-            <a href="https://file.io" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="partager fichiers auto suppression disparition"><img src="https://www.google.com/s2/favicons?domain=file.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">File.io</span><span class="tool-desc">Fichier éphémère</span></div></a>
+            <a href="https://file.io" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="partager fichiers auto suppression"><img src="https://www.google.com/s2/favicons?domain=file.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">File.io</span><span class="tool-desc">Fichier éphémère</span></div></a>
         </div>
     </div>
 
@@ -334,10 +360,10 @@
             <a href="https://checkshorturl.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="dévoiler lien raccourci url vraie destination"><img src="https://www.google.com/s2/favicons?domain=checkshorturl.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Check Short URL</span><span class="tool-desc">Dévoiler lien</span></div></a>
             <a href="https://www.speedtest.net/fr" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="test vitesse connexion internet débit"><img src="https://www.google.com/s2/favicons?domain=speedtest.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Speedtest</span><span class="tool-desc">Test connexion</span></div></a>
             <a href="https://ffmicalculator.org/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="calculer masse musculaire salle de sport"><img src="https://www.google.com/s2/favicons?domain=ffmicalculator.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">FFMI Calculator</span><span class="tool-desc">Masse musculaire</span></div></a>
-            <a href="https://wolframalpha.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résoudre instantanément problème maths calculs"><img src="https://www.google.com/s2/favicons?domain=wolframalpha.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Wolfram Alpha</span><span class="tool-desc">Calculs avancés</span></div></a>
-            <a href="https://archive.ph/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder page web pour toujours capture"><img src="https://www.google.com/s2/favicons?domain=archive.ph&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Archive.ph</span><span class="tool-desc">Sauvegarder page</span></div></a>
-            <a href="https://downdetector.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="vérifier site web panne serveur indisponible"><img src="https://www.google.com/s2/favicons?domain=downdetector.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Downdetector</span><span class="tool-desc">Panne de sites</span></div></a>
-            <a href="https://ilovepdf.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="fusionner diviser pdf outils traitement"><img src="https://www.google.com/s2/favicons?domain=ilovepdf.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">iLovePDF</span><span class="tool-desc">Fusionner/diviser</span></div></a>
+            <a href="https://wolframalpha.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résoudre instantanément problème maths"><img src="https://www.google.com/s2/favicons?domain=wolframalpha.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Wolfram Alpha</span><span class="tool-desc">Calculs avancés</span></div></a>
+            <a href="https://archive.ph/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="sauvegarder page web pour toujours"><img src="https://www.google.com/s2/favicons?domain=archive.ph&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Archive.ph</span><span class="tool-desc">Sauvegarder page</span></div></a>
+            <a href="https://downdetector.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="vérifier site web panne serveur"><img src="https://www.google.com/s2/favicons?domain=downdetector.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Downdetector</span><span class="tool-desc">Panne de sites</span></div></a>
+            <a href="https://ilovepdf.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="fusionner et diviser pdf"><img src="https://www.google.com/s2/favicons?domain=ilovepdf.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">iLovePDF</span><span class="tool-desc">Fusionner/diviser PDF</span></div></a>
         </div>
     </div>
 
@@ -347,12 +373,20 @@
         <div class="grid">
             <a href="https://github.com/steamnerds/userscripts" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="organiser ranger jeux steam"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Stack</span><span class="tool-desc">Organiser Steam</span></div></a>
             <a href="https://www.youtube.com/watch?v=bYyHmRDvEPk" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="augmenter heures jeu steam idler"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Idle Hours</span><span class="tool-desc">Heures de jeu</span></div></a>
-            <a href="https://www.youtube.com/watch?v=6AU34WOpD-4" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="débloquer succès steam achievement unlocker"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Achievements</span><span class="tool-desc">Débloquer succès</span></div></a>
+            <a href="https://www.youtube.com/watch?v=6AU34WOpD-4" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="débloquer succès steam unlocker"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam Achievements</span><span class="tool-desc">Débloquer succès</span></div></a>
             <a href="https://pokemon-awesome.vercel.app/pokemon" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="liste tous pokémon pokédex"><img src="https://www.google.com/s2/favicons?domain=vercel.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokédex Complet</span><span class="tool-desc">Tous les Pokémon</span></div></a>
             <a href="https://pokemonlist.netlify.app/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="pokémon première génération 151"><img src="https://www.google.com/s2/favicons?domain=netlify.app&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokémon Gen 1</span><span class="tool-desc">151 premiers</span></div></a>
             <a href="https://www.pokellector.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="collection cartes pokemon"><img src="https://www.google.com/s2/favicons?domain=pokellector.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokémon Cards</span><span class="tool-desc">Cartes à jouer</span></div></a>
             <a href="https://www.scriptolab.com/minecraft-pixel-art-en.php" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="générateur plan pixel art minecraft"><img src="https://www.google.com/s2/favicons?domain=scriptolab.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Minecraft Pixel Art</span><span class="tool-desc">Plans Minecraft</span></div></a>
-            <a href="https://sega-play.online/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="émulateur jeux sega mega drive genesis master system en ligne"><img src="https://www.google.com/s2/favicons?domain=sega-play.online&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Sega Play Online</span><span class="tool-desc">Émulateur Sega</span></div></a>
+            <a href="https://sega-play.online/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="émulateur jeux sega en ligne"><img src="https://www.google.com/s2/favicons?domain=sega-play.online&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Sega Play Online</span><span class="tool-desc">Émulateur Sega</span></div></a>
+            <a href="https://www.pokeclicker.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="jeu clics rapide pokémon"><img src="https://www.google.com/s2/favicons?domain=pokeclicker.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Pokeclicker</span><span class="tool-desc">Jeu Pokémon</span></div></a>
+            <a href="https://kbhgames.com/game/roulette-knight" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="jeu roulette knight"><img src="https://www.google.com/s2/favicons?domain=kbhgames.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Roulette Knight</span><span class="tool-desc">Jeu en ligne</span></div></a>
+            <a href="https://suikagame.com/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="jeu suika game"><img src="https://www.google.com/s2/favicons?domain=suikagame.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Suika Game</span><span class="tool-desc">Jeu Suika</span></div></a>
+            <a href="https://neal.fun/infinite-craft/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="mélanger éléments pour en créer de nouveaux"><img src="https://www.google.com/s2/favicons?domain=neal.fun&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Infinite Craft</span><span class="tool-desc">Mélanger éléments</span></div></a>
+            <a href="https://neal.fun/sandboxels/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="jeu simulation physique sandboxels"><img src="https://www.google.com/s2/favicons?domain=neal.fun&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Sandboxels</span><span class="tool-desc">Simulation physique</span></div></a>
+            <a href="https://www.minecraft-illimity.com/login" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="héberger serveur minecraft gratuitement"><img src="https://www.google.com/s2/favicons?domain=minecraft-illimity.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Minecraft Illimity</span><span class="tool-desc">Serveur Minecraft</span></div></a>
+            <a href="https://www.steamcardexchange.net/index.php?badgeprices" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="suivre coût badges steam level up"><img src="https://www.google.com/s2/favicons?domain=steamcardexchange.net&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">SteamCardExchange</span><span class="tool-desc">Prix Level Up</span></div></a>
+            <a href="https://steam.design/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="designer profil steam personnalisation"><img src="https://www.google.com/s2/favicons?domain=steam.design&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Steam.Design</span><span class="tool-desc">Design profil Steam</span></div></a>
         </div>
     </div>
 
@@ -371,9 +405,9 @@
         <div class="grid">
             <a href="https://chat.z.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="ia ultra performante pour coder gratuite"><img src="https://www.google.com/s2/favicons?domain=z.ai&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Z.AI</span><span class="tool-desc">IA pour coder</span></div></a>
             <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="moteur recherche intelligence artificielle sources"><img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Perplexity AI</span><span class="tool-desc">Recherche IA</span></div></a>
-            <a href="https://notebooklm.google.com/notebook/f52081b7-75e1-40e5-ba1c-c577d9019d78" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéo livre document ia google"><img src="https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">NotebookLM</span><span class="tool-desc">Résumer vidéos/livres</span></div></a>
+            <a href="https://notebooklm.google.com/notebook/f52081b7-75e1-40e5-ba1c-c577d9019d78" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéos/livres ia google"><img src="https://www.google.com/s2/favicons?domain=notebooklm.google.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">NotebookLM</span><span class="tool-desc">Résumer vidéos/livres</span></div></a>
             <a href="https://www.are.na/consumer-aesthetics-research-institute/channels" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="inspiration design artistique moodboard"><img src="https://www.google.com/s2/favicons?domain=are.na&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Inspiration Artistique</span><span class="tool-desc">Moodboard design</span></div></a>
-            <a href="https://summarize.tech" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéo youtube automatiquement"><img src="https://www.google.com/s2/favicons?domain=summarize.tech&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Summarize.tech</span><span class="tool-desc">Résumer vidéos</span></div></a>
+            <a href="https://summarize.tech" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="résumer vidéo youtube"><img src="https://www.google.com/s2/favicons?domain=summarize.tech&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Summarize.tech</span><span class="tool-desc">Résumer vidéos</span></div></a>
         </div>
     </div>
 
@@ -384,8 +418,9 @@
             <a href="https://web.archive.org/web/20151024173003/http://guillotine.voila.net:80/Palmares1871_1977.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="histoire france exécution capitale"><img src="https://www.google.com/s2/favicons?domain=web.archive.org&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Palmarès Exécutions</span><span class="tool-desc">Histoire France</span></div></a>
             <a href="https://world-geography-games.com/world.html" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="apprendre géographie pays carte"><img src="https://www.google.com/s2/favicons?domain=world-geography-games.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Jeux de Géographie</span><span class="tool-desc">Apprendre cartes</span></div></a>
             <a href="https://jacky-liang.github.io/age-timer/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="chronomètre âge temps passé vie"><img src="https://www.google.com/s2/favicons?domain=github.io&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Age Timer</span><span class="tool-desc">Chronomètre de vie</span></div></a>
-            <a href="https://grantkot.com/ll/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="physique simulation faire bouger masse chaîne"><img src="https://www.google.com/s2/favicons?domain=grantkot.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Locomass</span><span class="tool-desc">Simulation physique</span></div></a>
-            <a href="https://www.jetpunk.com/quizzes/pays-du-monde" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="quiz pays géographie monde deviner nom"><img src="https://www.google.com/s2/favicons?domain=jetpunk.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Jetpunk</span><span class="tool-desc">Quiz pays du monde</span></div></a>
+            <a href="https://grantkot.com/ll/" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="simulation physique masse chaîne"><img src="https://www.google.com/s2/favicons?domain=grantkot.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Locomass</span><span class="tool-desc">Simulation physique</span></div></a>
+            <a href="https://www.jetpunk.com/quizzes/pays-du-monde" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="quiz pays géographie monde"><img src="https://www.google.com/s2/favicons?domain=jetpunk.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Jetpunk</span><span class="tool-desc">Quiz pays du monde</span></div></a>
+            <a href="https://demineur.nhtdev.com/fr/play/expert#level-2" target="_blank" rel="noopener noreferrer" class="tool-card" data-desc="démineur mode expert"><img src="https://www.google.com/s2/favicons?domain=nhtdev.com&sz=64" alt="" class="tool-icon"><div class="tool-info"><span class="tool-name">Démineur Expert</span><span class="tool-desc">Jeu Démineur</span></div></a>
         </div>
     </div>
 
@@ -399,88 +434,154 @@
         const featuredFlexBox = document.querySelector('.featured-flex-container');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const backToTop = document.getElementById('backToTop');
+        const noResults = document.getElementById('noResults');
+        const noResultsTerm = document.getElementById('noResultsTerm');
+        const fadeTimers = new Map();
 
-        searchInput.addEventListener('input', function(e) {
-            const term = e.target.value.toLowerCase();
+        // --- Transitions fluides ---
+        function fadeOut(el) {
+            if (fadeTimers.has(el)) clearTimeout(fadeTimers.get(el));
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(8px)';
+            fadeTimers.set(el, setTimeout(() => { el.style.display = 'none'; }, 220));
+        }
+
+        function fadeIn(el) {
+            if (fadeTimers.has(el)) {
+                clearTimeout(fadeTimers.get(el));
+                fadeTimers.delete(el);
+            }
+            el.style.display = '';
+            void el.offsetWidth;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        }
+
+        // --- Compteurs d'outils ---
+        categories.forEach(cat => {
+            const count = cat.querySelectorAll('.tool-card').length;
+            const h2 = cat.querySelector('h2');
+            const span = document.createElement('span');
+            span.className = 'tool-count';
+            span.textContent = count;
+            h2.appendChild(span);
+        });
+
+        // --- Recherche ---
+        searchInput.addEventListener('input', function() {
+            const term = searchInput.value.toLowerCase().trim();
             filterBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-filter="all"]').classList.add('active');
 
+            // Featured
             if (term === '') {
-                featuredBox.classList.remove('hidden');
-                featuredFlexBox.classList.remove('hidden');
+                fadeIn(featuredBox);
+                fadeIn(featuredFlexBox);
             } else {
-                const fmhyDesc = featuredBox.querySelector('.featured-card').getAttribute('data-desc').toLowerCase();
-                const fmhyTitle = featuredBox.querySelector('.featured-card').textContent.toLowerCase();
-                if (fmhyTitle.includes(term) || fmhyDesc.includes(term)) featuredBox.classList.remove('hidden');
-                else featuredBox.classList.add('hidden');
+                const fmhyCard = featuredBox.querySelector('.featured-card');
+                const fmhyMatch = fmhyCard.textContent.toLowerCase().includes(term) || fmhyCard.dataset.desc.toLowerCase().includes(term);
+                fmhyMatch ? fadeIn(featuredBox) : fadeOut(featuredBox);
 
                 let showAnimeBox = false;
                 featuredFlexBox.querySelectorAll('.featured-card').forEach(card => {
-                    const name = card.textContent.toLowerCase();
-                    const desc = card.getAttribute('data-desc').toLowerCase();
-                    if(name.includes(term) || desc.includes(term)) showAnimeBox = true;
+                    if (card.textContent.toLowerCase().includes(term) || card.dataset.desc.toLowerCase().includes(term)) showAnimeBox = true;
                 });
-                if(showAnimeBox) featuredFlexBox.classList.remove('hidden');
-                else featuredFlexBox.classList.add('hidden');
+                showAnimeBox ? fadeIn(featuredFlexBox) : fadeOut(featuredFlexBox);
             }
 
-            categories.forEach(cat => cat.classList.remove('hidden'));
+            // Cartes
+            let visibleCount = 0;
             cards.forEach(card => {
-                const name = card.textContent.toLowerCase();
-                const desc = card.getAttribute('data-desc').toLowerCase();
-                if (name.includes(term) || desc.includes(term)) card.classList.remove('hidden');
-                else card.classList.add('hidden');
+                const match = card.textContent.toLowerCase().includes(term) || card.dataset.desc.toLowerCase().includes(term);
+                card.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
             });
 
+            // Catégories
             categories.forEach(cat => {
-                const visibleCards = cat.querySelectorAll('.tool-card:not(.hidden)');
-                if (visibleCards.length === 0) cat.classList.add('hidden');
+                let hasVisible = false;
+                cat.querySelectorAll('.tool-card').forEach(c => {
+                    if (c.style.display !== 'none') hasVisible = true;
+                });
+                hasVisible ? fadeIn(cat) : fadeOut(cat);
             });
+
+            // Aucun résultat
+            noResultsTerm.textContent = searchInput.value;
+            if (term !== '' && visibleCount === 0) {
+                fadeIn(noResults);
+            } else {
+                fadeOut(noResults);
+            }
         });
 
+        // --- Filtres ---
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 searchInput.value = '';
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
+                const filter = btn.dataset.filter;
 
                 categories.forEach(cat => {
-                    if (filter === 'all' || cat.getAttribute('data-category') === filter) cat.classList.remove('hidden');
-                    else cat.classList.add('hidden');
+                    const match = filter === 'all' || cat.dataset.category === filter;
+                    if (match) {
+                        fadeIn(cat);
+                        cat.querySelectorAll('.tool-card').forEach(c => c.style.display = '');
+                    } else {
+                        fadeOut(cat);
+                    }
                 });
 
-                if(filter === 'all' || filter === 'Streaming') {
-                    featuredBox.classList.remove('hidden');
-                    featuredFlexBox.classList.remove('hidden');
+                if (filter === 'all' || filter === 'Streaming') {
+                    fadeIn(featuredBox);
+                    fadeIn(featuredFlexBox);
                 } else {
-                    featuredBox.classList.add('hidden');
-                    featuredFlexBox.classList.add('hidden');
+                    fadeOut(featuredBox);
+                    fadeOut(featuredFlexBox);
                 }
+
+                fadeOut(noResults);
             });
         });
 
+        // --- Raccourci clavier / ---
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && document.activeElement !== searchInput) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // --- Échap pour vider la recherche ---
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                searchInput.blur();
+                searchInput.dispatchEvent(new Event('input'));
+            }
+        });
+
+        // --- Retour en haut ---
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) backToTop.classList.add('show');
-            else backToTop.classList.remove('show');
+            backToTop.classList.toggle('show', window.scrollY > 300);
         });
 
         backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(() => searchInput.focus(), 500); 
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setTimeout(() => searchInput.focus(), 500);
         });
 
+        // --- Sauvegarde du code ---
         document.getElementById('saveBtn').addEventListener('click', () => {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
             const a = document.createElement('a');
-            a.href = url;
+            a.href = URL.createObjectURL(blob);
             a.download = 'toolbox-backup.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            URL.revokeObjectURL(a.href);
         });
     </script>
 
