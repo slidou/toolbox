@@ -37,7 +37,7 @@
             cursor: pointer;
             font-size: 0.9rem;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
         }
         #saveBtn:hover {
             color: #fff;
@@ -52,7 +52,7 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             color: #ffffff; font-size: 1rem; outline: none; box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .search-input::placeholder { color: rgba(255, 255, 255, 0.4); }
         .search-input:focus { border-color: rgba(168, 161, 246, 0.5); box-shadow: 0 0 20px rgba(168, 161, 246, 0.2); }
@@ -60,7 +60,7 @@
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
             background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
             border-radius: 6px; padding: 2px 8px; font-size: 0.75rem; color: rgba(255,255,255,0.3);
-            pointer-events: none; transition: opacity 0.2s;
+            pointer-events: none; transition: opacity 0.2s ease;
         }
         .search-input:focus ~ .search-shortcut { opacity: 0; }
 
@@ -70,7 +70,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
             color: rgba(255,255,255,0.7); cursor: pointer;
-            font-size: 0.85rem; transition: all 0.3s ease; font-family: inherit;
+            font-size: 0.85rem; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease; font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
             background: rgba(168, 161, 246, 0.2);
@@ -81,13 +81,15 @@
         .featured-card {
             background: rgba(168, 161, 246, 0.1);
             border: 1px solid rgba(168, 161, 246, 0.4);
-            padding: 25px; border-radius: 20px; text-decoration: none;
+            padding: 25px; border-radius: 20px;
             color: #ffffff; display: flex; align-items: center; gap: 20px;
-            transition: all 0.3s ease; box-shadow: 0 0 25px rgba(168, 161, 246, 0.2);
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 25px rgba(168, 161, 246, 0.2);
         }
         .featured-card:hover { background: rgba(168, 161, 246, 0.2); transform: translateY(-5px); box-shadow: 0 0 40px rgba(168, 161, 246, 0.5); }
-        .featured-icon { width: 50px; height: 50px; border-radius: 12px; }
-        .featured-text { text-align: left; }
+        .featured-link { display: flex; align-items: center; gap: 20px; text-decoration: none; color: #ffffff; flex: 1; min-width: 0; }
+        .featured-icon { width: 50px; height: 50px; border-radius: 12px; flex-shrink: 0; }
+        .featured-text { text-align: left; min-width: 0; }
         .featured-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 5px; }
         .featured-desc { font-size: 0.9rem; color: #d0cdf7; }
 
@@ -102,10 +104,10 @@
 
         .tool-card-wrapper {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px; border-radius: 16px;
-            transition: all 0.3s ease; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
             position: relative;
             display: flex; align-items: center; justify-content: space-between; gap: 5px;
         }
@@ -118,7 +120,7 @@
         }
 
         .tool-icon { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: rgba(255, 255, 255, 0.1); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); flex-shrink: 0; }
-        
+
         .tool-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
         .tool-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .tool-desc { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -126,7 +128,7 @@
         .fav-btn {
             background: transparent; border: none; cursor: pointer;
             color: rgba(255,255,255,0.3); font-size: 1.2rem;
-            padding: 5px; transition: all 0.3s ease; flex-shrink: 0;
+            padding: 5px; transition: color 0.3s ease, transform 0.3s ease; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
         }
         .fav-btn:hover { color: #f1c40f; transform: scale(1.2); }
@@ -136,7 +138,8 @@
             position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(5px);
             background: #1a1a2e; color: #fff; padding: 6px 12px; border-radius: 8px;
             font-size: 0.8rem; max-width: 220px; width: max-content; text-align: center;
-            pointer-events: none; opacity: 0; visibility: hidden; transition: all 0.2s ease; z-index: 100;
+            pointer-events: none; opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; z-index: 100;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid rgba(168, 161, 246, 0.3);
             word-wrap: break-word;
         }
@@ -144,7 +147,8 @@
             content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
             border: 6px solid transparent; border-top-color: #1a1a2e;
         }
-        .tool-card-wrapper:hover .tooltip {
+        .tool-card-wrapper:hover .tooltip,
+        .tool-card-wrapper:focus-within .tooltip {
             opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
         }
 
@@ -155,17 +159,41 @@
         }
         .no-results-emoji { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
         .no-results-text { font-size: 1.1rem; color: rgba(255,255,255,0.4); }
-        #noResultsTerm { color: rgba(168, 161, 246, 0.8); font-weight: 500; }
+        .no-results-term { color: rgba(168, 161, 246, 0.8); font-weight: 500; }
 
         #backToTop {
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%;
             background: rgba(168, 161, 246, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(168, 161, 246, 0.4); color: white; font-size: 1.5rem; cursor: pointer;
             display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
-            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
         }
         #backToTop.show { opacity: 1; visibility: visible; }
         #backToTop:hover { background: rgba(168, 161, 246, 0.4); transform: translateY(-3px); }
+
+        /* Accessibilité clavier */
+        .tool-card:focus-visible, .featured-link:focus-visible, .filter-btn:focus-visible,
+        .fav-btn:focus-visible, #saveBtn:focus-visible, #backToTop:focus-visible {
+            outline: 2px solid rgba(168, 161, 246, 0.8);
+            outline-offset: 2px;
+        }
+
+        /* Respect des préférences système */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Petits écrans : évite le chevauchement h1 / bouton Save */
+        @media (max-width: 600px) {
+            body { padding: 80px 15px 40px; }
+            h1 { font-size: 2rem; letter-spacing: 1px; }
+            #backToTop { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+        }
     </style>
 </head>
 <body>
@@ -173,40 +201,39 @@
     <h1>🧰 Toolbox</h1>
     <button id="saveBtn" title="Télécharger le code du site" aria-label="Sauvegarder le code du site">💾 Save Code</button>
 
-    <div class="search-container" role="search">
-        <input type="text" id="search" class="search-input" placeholder="Rechercher un outil (ex: image, musique, pdf...)" aria-label="Rechercher un outil">
-        <span class="search-shortcut">/</span>
-    </div>
+    <main>
+        <div class="search-container" role="search">
+            <input type="text" id="search" class="search-input" placeholder="Rechercher un outil (ex: image, musique, pdf...)" aria-label="Rechercher un outil">
+            <span class="search-shortcut">/</span>
+        </div>
 
-    <div class="filter-container" id="filter-container"></div>
-    <div id="featured-container" class="featured-container"></div>
-    <div id="featured-flex-container" class="featured-flex-container"></div>
+        <div class="filter-container" id="filter-container"></div>
+        <div id="featured-container" class="featured-container"></div>
+        <div id="featured-flex-container" class="featured-flex-container"></div>
 
-    <div id="noResults" class="no-results" style="display:none;">
-        <div class="no-results-emoji">🔍</div>
-        <div class="no-results-text">Aucun outil trouvé pour « <span id="noResultsTerm"></span> »</div>
-    </div>
+        <div id="noResults" class="no-results" style="display:none;" aria-live="polite">
+            <div class="no-results-emoji" id="noResultsEmoji">🔍</div>
+            <div class="no-results-text" id="noResultsText"></div>
+        </div>
 
-    <div id="categories-container"></div>
+        <div id="categories-container"></div>
+    </main>
+
     <button id="backToTop" aria-label="Retour en haut">↑</button>
 
     <script>
-        // Icône de secours globale
+        // ==========================================
+        // DONNÉES
+        // ==========================================
         const fallbackIcon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E";
-        
-        // Fonction globale pour éviter les problèmes de syntaxe dans le HTML
-        window.handleImgError = function(img) {
-            img.onerror = null; 
-            img.src = fallbackIcon;
-        };
 
         const featuredData = [
-            { name: "The Ultimate Site - FMHY", url: "https://fmhy.net/video", desc: "Le site ultime pour trouver absolument tout ce que l'on cherche gratuitement sur internet.", fullDesc: "site ultime gratuit trouver films series streaming téléchargement", imgDomain: "fmhy.net", alt: "FMHY" }
+            { name: "The Ultimate Site - FMHY", url: "https://fmhy.net/video", desc: "Le site ultime pour trouver absolument tout ce que l'on cherche gratuitement sur internet.", fullDesc: "site ultime gratuit trouver films series streaming téléchargement", imgDomain: "fmhy.net", alt: "FMHY", categories: ["Streaming", "Téléchargement"] }
         ];
 
         const featuredFlexData = [
-            { name: "EverythingMoe", url: "https://everythingmoe.com/", desc: "Le répertoire incroyable pour tout ce qui touche aux animes, mangas, novels, etc.", fullDesc: "répertoire incroyable tout anime manga novel light novel", imgDomain: "everythingmoe.com", alt: "EM" },
-            { name: "The Index Moe", url: "https://theindex.moe/", desc: "L'annuaire ultime pour retrouver toutes les sources liées au manga et anime.", fullDesc: "annuaire complet index manga anime webtoon sources", imgDomain: "theindex.moe", alt: "TI" }
+            { name: "EverythingMoe", url: "https://everythingmoe.com/", desc: "Le répertoire incroyable pour tout ce qui touche aux animes, mangas, novels, etc.", fullDesc: "répertoire incroyable tout anime manga novel light novel", imgDomain: "everythingmoe.com", alt: "EM", categories: ["Streaming"] },
+            { name: "The Index Moe", url: "https://theindex.moe/", desc: "L'annuaire ultime pour retrouver toutes les sources liées au manga et anime.", fullDesc: "annuaire complet index manga anime webtoon sources", imgDomain: "theindex.moe", alt: "TI", categories: ["Streaming"] }
         ];
 
         const toolsData = [
@@ -386,8 +413,10 @@
         ];
 
         // ==========================================
-        // SYSTÈME DE FAVORIS (Sécurisé)
+        // ÉTAT & FAVORIS
         // ==========================================
+        const state = { filter: 'all', term: '' };
+
         let favorites = [];
         try {
             favorites = JSON.parse(localStorage.getItem('toolboxFavorites')) || [];
@@ -395,120 +424,120 @@
             favorites = [];
         }
 
-        function toggleFavorite(url, btn) {
+        const isFavorite = url => favorites.includes(url);
+
+        function toggleFavorite(url) {
             const index = favorites.indexOf(url);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.setAttribute('aria-pressed', 'false');
-                btn.setAttribute('aria-label', 'Ajouter aux favoris');
-            } else {
-                favorites.push(url);
-                btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');
-                btn.setAttribute('aria-label', 'Retirer des favoris');
-            }
+            const nowFav = index === -1;
+            if (nowFav) favorites.push(url);
+            else favorites.splice(index, 1);
+
             try {
                 localStorage.setItem('toolboxFavorites', JSON.stringify(favorites));
             } catch (e) {}
-        }
 
-        function isFavorite(url) {
-            return favorites.includes(url);
-        }
-
-        // ==========================================
-        // RENDU DYNAMIQUE (DATA-DRIVEN)
-        // ==========================================
-        function getDomain(url) {
-            try { 
-                return new URL(url).hostname; 
-            } catch (e) { 
-                return url; 
-            }
-        }
-
-        function renderFilters() {
-            const filters = [
-                { filter: "all", text: "Tous", icon: "✨" },
-                { filter: "Favoris", text: "Favoris", icon: "⭐" },
-                ...toolsData.map(c => ({ filter: c.category, text: c.filterText, icon: c.icon }))
-            ];
-            const container = document.getElementById('filter-container');
-            container.innerHTML = filters.map((f, i) => `
-                <button class="filter-btn ${i === 0 ? 'active' : ''}" data-filter="${f.filter}" aria-pressed="${i === 0 ? 'true' : 'false'}">${f.icon} ${f.text}</button>
-            `).join('');
-        }
-
-        function renderCards() {
-            // Featured container
-            const featContainer = document.getElementById('featured-container');
-            featContainer.innerHTML = featuredData.map(t => `
-                <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="featured-card" data-desc="${t.fullDesc}">
-                    <img src="https://www.google.com/s2/favicons?domain=${t.imgDomain}&sz=64" alt="${t.alt}" class="featured-icon" onerror="handleImgError(this)">
-                    <div class="featured-text">
-                        <div class="featured-title">${t.name}</div>
-                        <div class="featured-desc">${t.desc}</div>
-                    </div>
-                </a>
-            `).join('');
-
-            // Featured flex container
-            const featFlexContainer = document.getElementById('featured-flex-container');
-            featFlexContainer.innerHTML = featuredFlexData.map(t => `
-                <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="featured-card" data-desc="${t.fullDesc}">
-                    <img src="https://www.google.com/s2/favicons?domain=${t.imgDomain}&sz=64" alt="${t.alt}" class="featured-icon" onerror="handleImgError(this)">
-                    <div class="featured-text">
-                        <div class="featured-title">${t.name}</div>
-                        <div class="featured-desc">${t.desc}</div>
-                    </div>
-                </a>
-            `).join('');
-
-            // Categories
-            const catContainer = document.getElementById('categories-container');
-            catContainer.innerHTML = toolsData.map(cat => `
-                <div class="category" data-category="${cat.category}">
-                    <h2>${cat.icon} ${cat.title} <span class="tool-count"></span></h2>
-                    <div class="grid">
-                        ${cat.tools.map(t => `
-                            <div class="tool-card-wrapper" data-desc="${t.fullDesc}">
-                                <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="tool-card">
-                                    <img src="https://www.google.com/s2/favicons?domain=${getDomain(t.url)}&sz=64" alt="${t.name}" class="tool-icon" onerror="handleImgError(this)">
-                                    <div class="tool-info">
-                                        <span class="tool-name">${t.name}</span>
-                                        <span class="tool-desc">${t.shortDesc}</span>
-                                    </div>
-                                </a>
-                                <button class="fav-btn ${isFavorite(t.url) ? 'active' : ''}" data-url="${t.url}" aria-pressed="${isFavorite(t.url) ? 'true' : 'false'}" aria-label="${isFavorite(t.url) ? 'Retirer des favoris' : 'Ajouter aux favoris'}">⭐</button>
-                                <div class="tooltip">${t.fullDesc}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-
-            // Update counts
-            document.querySelectorAll('.category').forEach(cat => {
-                const count = cat.querySelectorAll('.tool-card-wrapper').length;
-                cat.querySelector('.tool-count').textContent = count;
+            // Met à jour tous les boutons correspondant à cette URL
+            document.querySelectorAll('.fav-btn').forEach(btn => {
+                if (btn.dataset.url !== url) return;
+                btn.classList.toggle('active', nowFav);
+                btn.setAttribute('aria-pressed', String(nowFav));
+                btn.setAttribute('aria-label', nowFav ? 'Retirer des favoris' : 'Ajouter aux favoris');
             });
         }
 
         // ==========================================
-        // INITIALISATION & LOGIQUE UI
+        // RENDU (généré une seule fois)
+        // ==========================================
+        const esc = s => String(s).replace(/[&<>"']/g, c => (
+            { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
+        ));
+
+        // Recherche insensible à la casse ET aux accents
+        const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        const faviconURL = domain => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+
+        function getDomain(url) {
+            try { return new URL(url).hostname; } catch (e) { return url; }
+        }
+
+        function favBtnHTML(url) {
+            const fav = isFavorite(url);
+            return `<button class="fav-btn ${fav ? 'active' : ''}" data-url="${esc(url)}" aria-pressed="${fav}" aria-label="${fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}">⭐</button>`;
+        }
+
+        function featuredCardHTML(t) {
+            const search = normalize([t.name, t.desc, t.fullDesc, ...t.categories].join(' '));
+            return `
+                <div class="featured-card" data-url="${esc(t.url)}" data-categories="${esc(t.categories.join(','))}" data-search="${esc(search)}">
+                    <a href="${esc(t.url)}" target="_blank" rel="noopener noreferrer" class="featured-link">
+                        <img src="${faviconURL(t.imgDomain)}" alt="${esc(t.alt)}" class="featured-icon" loading="lazy" decoding="async">
+                        <div class="featured-text">
+                            <div class="featured-title">${esc(t.name)}</div>
+                            <div class="featured-desc">${esc(t.desc)}</div>
+                        </div>
+                    </a>
+                    ${favBtnHTML(t.url)}
+                </div>`;
+        }
+
+        function toolCardHTML(t, cat) {
+            const search = normalize(`${t.name} ${t.shortDesc} ${t.fullDesc} ${cat.category}`);
+            return `
+                <div class="tool-card-wrapper" data-url="${esc(t.url)}" data-search="${esc(search)}">
+                    <a href="${esc(t.url)}" target="_blank" rel="noopener noreferrer" class="tool-card">
+                        <img src="${faviconURL(getDomain(t.url))}" alt="${esc(t.name)}" class="tool-icon" loading="lazy" decoding="async">
+                        <div class="tool-info">
+                            <span class="tool-name">${esc(t.name)}</span>
+                            <span class="tool-desc">${esc(t.shortDesc)}</span>
+                        </div>
+                    </a>
+                    ${favBtnHTML(t.url)}
+                    <div class="tooltip">${esc(t.fullDesc)}</div>
+                </div>`;
+        }
+
+        function renderFilters() {
+            const filters = [
+                { filter: 'all', text: 'Tous', icon: '✨' },
+                { filter: 'Favoris', text: 'Favoris', icon: '⭐' },
+                ...toolsData.map(c => ({ filter: c.category, text: c.filterText, icon: c.icon }))
+            ];
+            document.getElementById('filter-container').innerHTML = filters.map(f => `
+                <button class="filter-btn" data-filter="${esc(f.filter)}" aria-pressed="false">${f.icon} ${esc(f.text)}</button>
+            `).join('');
+        }
+
+        function renderCards() {
+            document.getElementById('featured-container').innerHTML = featuredData.map(featuredCardHTML).join('');
+            document.getElementById('featured-flex-container').innerHTML = featuredFlexData.map(featuredCardHTML).join('');
+            document.getElementById('categories-container').innerHTML = toolsData.map(cat => `
+                <div class="category" data-category="${esc(cat.category)}">
+                    <h2>${cat.icon} ${esc(cat.title)} <span class="tool-count">${cat.tools.length}</span></h2>
+                    <div class="grid">${cat.tools.map(t => toolCardHTML(t, cat)).join('')}</div>
+                </div>
+            `).join('');
+        }
+
+        // ==========================================
+        // LOGIQUE D'AFFICHAGE (source unique de vérité : state)
         // ==========================================
         const searchInput = document.getElementById('search');
         const backToTop = document.getElementById('backToTop');
         const noResults = document.getElementById('noResults');
-        const noResultsTerm = document.getElementById('noResultsTerm');
+        const noResultsEmoji = document.getElementById('noResultsEmoji');
+        const noResultsText = document.getElementById('noResultsText');
+        const featuredBox = document.getElementById('featured-container');
+        const featuredFlexBox = document.getElementById('featured-flex-container');
+
+        const FADE_MS = 250; // aligné sur les transitions CSS (0.25s)
         const fadeTimers = new Map();
 
         function fadeOut(el) {
             if (fadeTimers.has(el)) clearTimeout(fadeTimers.get(el));
             el.style.opacity = '0';
             el.style.transform = 'translateY(8px)';
-            fadeTimers.set(el, setTimeout(() => { el.style.display = 'none'; }, 220));
+            fadeTimers.set(el, setTimeout(() => { el.style.display = 'none'; }, FADE_MS));
         }
 
         function fadeIn(el) {
@@ -517,158 +546,163 @@
                 fadeTimers.delete(el);
             }
             el.style.display = '';
-            void el.offsetWidth;
+            void el.offsetWidth; // force le reflow pour relancer la transition
             el.style.opacity = '1';
             el.style.transform = 'translateY(0)';
+        }
+
+        function syncFilterButtons() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const isActive = btn.dataset.filter === state.filter;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', String(isActive));
+            });
+        }
+
+        // Une seule règle de visibilité pour toutes les cartes
+        function cardMatches(card) {
+            if (state.term) return card.dataset.search.includes(state.term);
+            if (state.filter === 'all') return true;
+            if (state.filter === 'Favoris') return isFavorite(card.dataset.url);
+            return card.dataset.categories
+                ? card.dataset.categories.split(',').includes(state.filter)
+                : card.closest('.category').dataset.category === state.filter;
+        }
+
+        function update() {
+            syncFilterButtons();
+
+            // Cartes d'outils
+            let visibleTools = 0;
+            document.querySelectorAll('.tool-card-wrapper').forEach(card => {
+                const show = cardMatches(card);
+                card.style.display = show ? 'flex' : 'none';
+                if (show) visibleTools++;
+            });
+
+            // Catégories vides -> masquées
+            document.querySelectorAll('.category').forEach(cat => {
+                const hasVisible = [...cat.querySelectorAll('.tool-card-wrapper')].some(c => c.style.display !== 'none');
+                hasVisible ? fadeIn(cat) : fadeOut(cat);
+            });
+
+            // Cartes "featured"
+            let singleVisible = false, anyFlexVisible = false;
+            document.querySelectorAll('.featured-card').forEach(card => {
+                const show = cardMatches(card);
+                card.style.display = show ? 'flex' : 'none';
+                if (!show) return;
+                card.closest('#featured-flex-container') ? anyFlexVisible = true : singleVisible = true;
+            });
+            singleVisible ? fadeIn(featuredBox) : fadeOut(featuredBox);
+            anyFlexVisible ? fadeIn(featuredFlexBox) : fadeOut(featuredFlexBox);
+
+            // Message d'état vide
+            const anyFeaturedVisible = singleVisible || anyFlexVisible;
+            if (state.term && visibleTools === 0 && !anyFeaturedVisible) {
+                noResultsEmoji.textContent = '🔍';
+                noResultsText.innerHTML = `Aucun outil trouvé pour « <span class="no-results-term">${esc(searchInput.value)}</span> »`;
+                fadeIn(noResults);
+            } else if (!state.term && state.filter === 'Favoris' && visibleTools === 0 && !anyFeaturedVisible) {
+                noResultsEmoji.textContent = '⭐';
+                noResultsText.textContent = "Aucun favori pour l'instant — clique sur l'étoile d'un outil pour le retrouver ici.";
+                fadeIn(noResults);
+            } else {
+                fadeOut(noResults);
+            }
         }
 
         // Démarrage
         renderFilters();
         renderCards();
+        update();
 
-        const featuredBox = document.getElementById('featured-container');
-        const featuredFlexBox = document.getElementById('featured-flex-container');
-
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('fav-btn')) {
+        // ==========================================
+        // ÉVÉNEMENTS (délégation unique)
+        // ==========================================
+        document.addEventListener('click', e => {
+            const favBtn = e.target.closest('.fav-btn');
+            if (favBtn) {
                 e.preventDefault();
-                e.stopPropagation();
-                toggleFavorite(e.target.dataset.url, e.target);
-                
-                const activeFilter = document.querySelector('.filter-btn.active');
-                if (activeFilter && activeFilter.dataset.filter === 'Favoris') {
-                    applyFilter('Favoris');
-                }
+                toggleFavorite(favBtn.dataset.url);
+                if (state.filter === 'Favoris') update();
+                return;
             }
-            
-            if (e.target.classList.contains('filter-btn')) {
+
+            const filterBtn = e.target.closest('.filter-btn');
+            if (filterBtn) {
                 searchInput.value = '';
-                document.querySelectorAll('.filter-btn').forEach(b => { 
-                    b.classList.remove('active'); 
-                    b.setAttribute('aria-pressed', 'false'); 
-                });
-                e.target.classList.add('active'); 
-                e.target.setAttribute('aria-pressed', 'true');
-                
-                applyFilter(e.target.dataset.filter);
+                state.term = '';
+                state.filter = filterBtn.dataset.filter;
+                update();
             }
         });
 
-        function applyFilter(filter) {
-            const categories = document.querySelectorAll('.category');
-            
-            categories.forEach(cat => {
-                let hasVisible = false;
-                cat.querySelectorAll('.tool-card-wrapper').forEach(c => {
-                    let match = false;
-                    if (filter === 'all') match = true;
-                    else if (filter === 'Favoris') match = c.querySelector('.fav-btn').classList.contains('active');
-                    else match = cat.dataset.category === filter;
-
-                    if (match) {
-                        c.style.display = 'flex';
-                        hasVisible = true;
-                    } else {
-                        c.style.display = 'none';
-                    }
-                });
-                hasVisible ? fadeIn(cat) : fadeOut(cat);
-            });
-
-            if (filter === 'all' || filter === 'Streaming' || filter === 'Favoris') {
-                fadeIn(featuredBox);
-                fadeIn(featuredFlexBox);
-            } else {
-                fadeOut(featuredBox);
-                fadeOut(featuredFlexBox);
-            }
-
-            fadeOut(noResults);
-        }
-
-        searchInput.addEventListener('input', function() {
-            const term = searchInput.value.toLowerCase().trim();
-            document.querySelectorAll('.filter-btn').forEach(btn => { 
-                btn.classList.remove('active'); 
-                btn.setAttribute('aria-pressed', 'false'); 
-            });
-            const allBtn = document.querySelector('[data-filter="all"]');
-            allBtn.classList.add('active'); 
-            allBtn.setAttribute('aria-pressed', 'true');
-
-            if (term === '') {
-                fadeIn(featuredBox);
-                fadeIn(featuredFlexBox);
-            } else {
-                const fmhyCard = featuredBox.querySelector('.featured-card');
-                if (fmhyCard) {
-                    const fmhyMatch = fmhyCard.textContent.toLowerCase().includes(term) || fmhyCard.dataset.desc.toLowerCase().includes(term);
-                    fmhyMatch ? fadeIn(featuredBox) : fadeOut(featuredBox);
-                }
-
-                let showAnimeBox = false;
-                featuredFlexBox.querySelectorAll('.featured-card').forEach(card => {
-                    if (card.textContent.toLowerCase().includes(term) || card.dataset.desc.toLowerCase().includes(term)) showAnimeBox = true;
-                });
-                showAnimeBox ? fadeIn(featuredFlexBox) : fadeOut(featuredFlexBox);
-            }
-
-            let visibleCount = 0;
-            document.querySelectorAll('.tool-card-wrapper').forEach(card => {
-                const match = card.textContent.toLowerCase().includes(term) || card.dataset.desc.toLowerCase().includes(term);
-                card.style.display = match ? 'flex' : 'none';
-                if (match) visibleCount++;
-            });
-
-            document.querySelectorAll('.category').forEach(cat => {
-                let hasVisible = false;
-                cat.querySelectorAll('.tool-card-wrapper').forEach(c => {
-                    if (c.style.display !== 'none') hasVisible = true;
-                });
-                hasVisible ? fadeIn(cat) : fadeOut(cat);
-            });
-
-            noResultsTerm.textContent = searchInput.value;
-            if (term !== '' && visibleCount === 0) {
-                fadeIn(noResults);
-            } else {
-                fadeOut(noResults);
-            }
+        searchInput.addEventListener('input', () => {
+            state.term = normalize(searchInput.value).trim();
+            state.filter = 'all';
+            update();
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === '/' && document.activeElement !== searchInput) {
-                e.preventDefault();
-                searchInput.focus();
-            }
-        });
-
-        searchInput.addEventListener('keydown', function(e) {
+        searchInput.addEventListener('keydown', e => {
             if (e.key === 'Escape') {
                 searchInput.value = '';
+                state.term = '';
+                state.filter = 'all';
+                update();
                 searchInput.blur();
-                searchInput.dispatchEvent(new Event('input'));
+            }
+        });
+
+        // Raccourci "/" pour focus la recherche
+        document.addEventListener('keydown', e => {
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                const el = document.activeElement;
+                if (el !== searchInput && el?.tagName !== 'INPUT' && el?.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    searchInput.focus();
+                    searchInput.select();
+                }
             }
         });
 
         window.addEventListener('scroll', () => {
             backToTop.classList.toggle('show', window.scrollY > 300);
-        });
+        }, { passive: true });
 
         backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => searchInput.focus(), 500);
         });
 
-        document.getElementById('saveBtn').addEventListener('click', () => {
-            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+        // Favicon de secours : délégation en phase de capture
+        // (l'événement "error" ne bulle pas, mais il se capture)
+        document.addEventListener('error', e => {
+            const img = e.target;
+            if (img.tagName === 'IMG' && !img.dataset.errored) {
+                img.dataset.errored = '1';
+                img.src = fallbackIcon;
+            }
+        }, true);
+
+        // Sauvegarde : récupère la source originale si possible (http/https),
+        // sinon retombe sur le DOM courant (utile en file://)
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            let html;
+            try {
+                const res = await fetch(location.href);
+                if (!res.ok) throw new Error('fetch échoué');
+                html = await res.text();
+            } catch (e) {
+                html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            }
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
+            a.href = url;
             a.download = 'toolbox-backup.html';
-            document.body.appendChild(a);
             a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(a.href);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
         });
     </script>
 
