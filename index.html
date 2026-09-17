@@ -563,6 +563,18 @@ const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${enco
             });
         }
 
+        function syncURL() {
+            const target = state.filter === 'all'
+                ? location.pathname + location.search
+                : '#' + encodeURIComponent(state.filter);
+            try {
+                history.replaceState(null, '', target);
+            } catch (e) {
+                // Contexte file:// qui bloque replaceState : on passe par le hash
+                if (state.filter !== 'all') location.hash = encodeURIComponent(state.filter);
+            }
+        }
+
         // Une seule règle de visibilité pour toutes les cartes
         function cardMatches(card) {
             if (state.term) return state.term.split(/\s+/).every(w => card.dataset.search.includes(w));
@@ -614,9 +626,12 @@ const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${enco
             } else {
                 fadeOut(noResults);
             }
+
+            syncURL();
         }
 
         // Démarrage : restaure le filtre indiqué dans l'URL (#musique, #favoris…)
+        
         const initialFilter = decodeURIComponent(location.hash.slice(1));
         if (initialFilter === 'Favoris' || toolsData.some(c => c.category === initialFilter)) {
         state.filter = initialFilter;
