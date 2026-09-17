@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#24243e">
     <title>Toolbox</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
     <style>
@@ -203,7 +204,7 @@
 
     <main>
         <div class="search-container" role="search">
-            <input type="text" id="search" class="search-input" placeholder="Rechercher un outil (ex: image, musique, pdf...)" aria-label="Rechercher un outil">
+            <input type="text" id="search" class="search-input" placeholder="Rechercher un outil (ex: image, musique, pdf...)" aria-label="Rechercher un outil" spellcheck="false" autocomplete="off">
             <span class="search-shortcut">/</span>
         </div>
 
@@ -221,7 +222,7 @@
 
     <button id="backToTop" aria-label="Retour en haut">↑</button>
 
-    <script>
+    <script type="module">
         // ==========================================
         // DONNÉES
         // ==========================================
@@ -455,7 +456,10 @@
         // Recherche insensible à la casse ET aux accents
         const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-        const faviconURL = domain => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+        // ~150 icônes d'outils (affichées en 32px) : DuckDuckGo, sans traçage Google
+const faviconURL = domain => `https://icons.duckduckgo.com/ip3/${encodeURIComponent(domain)}.ico`;
+// Les 3 cartes featured (affichées en 50px) : Google en 64px pour rester nettes
+const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
 
         function getDomain(url) {
             try { return new URL(url).hostname; } catch (e) { return url; }
@@ -471,7 +475,7 @@
             return `
                 <div class="featured-card" data-url="${esc(t.url)}" data-categories="${esc(t.categories.join(','))}" data-search="${esc(search)}">
                     <a href="${esc(t.url)}" target="_blank" rel="noopener noreferrer" class="featured-link">
-                        <img src="${faviconURL(t.imgDomain)}" alt="${esc(t.alt)}" class="featured-icon" loading="lazy" decoding="async">
+                        <img src="${faviconURLHQ(t.imgDomain)}" alt="${esc(t.alt)}" class="featured-icon" loading="lazy" decoding="async">
                         <div class="featured-text">
                             <div class="featured-title">${esc(t.name)}</div>
                             <div class="featured-desc">${esc(t.desc)}</div>
@@ -561,7 +565,7 @@
 
         // Une seule règle de visibilité pour toutes les cartes
         function cardMatches(card) {
-            if (state.term) return card.dataset.search.includes(state.term);
+            if (state.term) return state.term.split(/\s+/).every(w => card.dataset.search.includes(w));
             if (state.filter === 'all') return true;
             if (state.filter === 'Favoris') return isFavorite(card.dataset.url);
             return card.dataset.categories
@@ -612,11 +616,15 @@
             }
         }
 
-        // Démarrage
+        // Démarrage : restaure le filtre indiqué dans l'URL (#musique, #favoris…)
+        const initialFilter = decodeURIComponent(location.hash.slice(1));
+        if (initialFilter === 'Favoris' || toolsData.some(c => c.category === initialFilter)) {
+        state.filter = initialFilter;
+        }
         renderFilters();
         renderCards();
         update();
-
+        
         // ==========================================
         // ÉVÉNEMENTS (délégation unique)
         // ==========================================
