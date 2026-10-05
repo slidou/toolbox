@@ -267,7 +267,10 @@
                 { name: "Lucida (DL Spotify)", url: "https://lucida.to/", shortDesc: "Musiques Spotify", fullDesc: "télécharger musique spotify mp3" },
                 { name: "VK Video DL", url: "https://vkvideodownload.com/fr/", shortDesc: "Vidéos VK HD", fullDesc: "télécharger vidéo vk hd mp4 gratuit sécurisé sans installation" },
                 { name: "YT DL (Ytdown)", url: "https://app.ytdown.to/fr38/", shortDesc: "Vidéos YouTube", fullDesc: "téléchargeur vidéos youtube gratuit sans inscription mp4" },
-                { name: "Cobalt", url: "https://cobalt.meowing.de/", shortDesc: "DL Multi-médias", fullDesc: "télécharger sauvegarder vidéo audio photo gif multi-sites coller lien" }
+                { name: "Cobalt", url: "https://cobalt.meowing.de/", shortDesc: "DL Multi-médias", fullDesc: "télécharger sauvegarder vidéo audio photo gif multi-sites coller lien" },
+                { name: "Link to Keep", url: "https://linktokeep.com/", shortDesc: "DL multi-plateformes", fullDesc: "télécharger vidéo audio youtube instagram twitter facebook reddit soundcloud vimeo twitch" },
+                { name: "Get4All", url: "https://get4all.org/#hosts", shortDesc: "Debrid multi-hébergeurs", fullDesc: "debrid liens premium hébergeurs fichiers rapidgator 1fichier téléchargement direct haute vitesse" },
+                { name: "KHInsider (OST)", url: "https://downloads.khinsider.com/", shortDesc: "Musiques de jeux", fullDesc: "télécharger musique jeu vidéo ost soundtrack gamerip mp3 lossless gratuit" }
             ]},
             { category: "Streaming", icon: "🍿", filterText: "Streaming", title: "Streaming & Lectures", tools: [
                 { name: "70 Millimètres", url: "https://70millimetres.fr/", shortDesc: "Streaming légal", fullDesc: "cinéma gratuit streaming légal arte france tv" },
@@ -283,6 +286,7 @@
                 { name: "Webtoon XYZ", url: "https://www.webtoon.xyz/", shortDesc: "Webtoons en ligne", fullDesc: "lire webtoon en ligne" },
                 { name: "Weeb Central", url: "https://weebcentral.com/", shortDesc: "Scans Webtoon", fullDesc: "webtoon manga scanlation" },
                 { name: "Toonily", url: "https://toonily.com/", shortDesc: "Webtoons EN", fullDesc: "webtoon anglais traduit" },
+                { name: "Comico.moe", url: "https://comico.moe/", shortDesc: "Agrégateur mangas", fullDesc: "lire manga manhwa webtoon scanlation agrégateur sources multiples suivi lecture tracker" },
                 { name: "Anna's Archive", url: "https://annas-archive.gl/", shortDesc: "Livres gratuits", fullDesc: "bibliothèque livres gratuits pdf epub" },
                 { name: "Z-Library", url: "https://z-library.sk/", shortDesc: "Ebooks gratuits", fullDesc: "télécharger livres ebooks gratuits" },
                 { name: "Internet Archive", url: "https://archive.org/details/books", shortDesc: "Bibliothèque mondiale", fullDesc: "livres anciens gratuits bibliothèque mondiale" },
@@ -322,7 +326,9 @@
                 { name: "Squoosh", url: "https://squoosh.app/", shortDesc: "Compresser image", fullDesc: "compresser gratuitement n'importe quelle image" },
                 { name: "Unscreen", url: "https://unscreen.com/", shortDesc: "Suppr. fond vidéo", fullDesc: "supprimer arrière plan vidéo" },
                 { name: "ThisAnimeDoesNotExist", url: "https://thisanimedoesnotexist.ai/", shortDesc: "Images IA Anime", fullDesc: "images animes mangas générées ia" },
-                { name: "Topsters", url: "https://topsters.org/", shortDesc: "Créer des tops", fullDesc: "créer topsters top image collage favoris carré musique film jeux" }
+                { name: "Topsters", url: "https://topsters.org/", shortDesc: "Créer des tops", fullDesc: "créer topsters top image collage favoris carré musique film jeux" },
+                { name: "Free Vintage Illus.", url: "https://freevintageillustrations.com/illustrations", shortDesc: "Art rétro libre", fullDesc: "illustrations vintage domaine public gratuites rétro art classique gravures" },
+                { name: "Another Graphic", url: "https://anothergraphic.org/", shortDesc: "Design & typo", fullDesc: "archive design graphique typographie inspiration créative œuvres choisies" }
             ]},
             { category: "Hébergement", icon: "☁️", filterText: "Upload", title: "Hébergement & Upload", tools: [
                 { name: "Zupimages", url: "https://www.zupimages.net/", shortDesc: "Héberger image", fullDesc: "héberger image en ligne" },
@@ -457,9 +463,9 @@
         const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         // ~150 icônes d'outils (affichées en 32px) : DuckDuckGo, sans traçage Google
-const faviconURL = domain => `https://icons.duckduckgo.com/ip3/${encodeURIComponent(domain)}.ico`;
-// Les 3 cartes featured (affichées en 50px) : Google en 64px pour rester nettes
-const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+        const faviconURL = domain => `https://icons.duckduckgo.com/ip3/${encodeURIComponent(domain)}.ico`;
+        // Les 3 cartes featured (affichées en 50px) : Google en 64px pour rester nettes
+        const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
 
         function getDomain(url) {
             try { return new URL(url).hostname; } catch (e) { return url; }
@@ -631,15 +637,14 @@ const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${enco
         }
 
         // Démarrage : restaure le filtre indiqué dans l'URL (#musique, #favoris…)
-        
         const initialFilter = decodeURIComponent(location.hash.slice(1));
         if (initialFilter === 'Favoris' || toolsData.some(c => c.category === initialFilter)) {
-        state.filter = initialFilter;
+            state.filter = initialFilter;
         }
         renderFilters();
         renderCards();
         update();
-        
+
         // ==========================================
         // ÉVÉNEMENTS (délégation unique)
         // ==========================================
@@ -727,6 +732,7 @@ const faviconURLHQ = domain => `https://www.google.com/s2/favicons?domain=${enco
             a.click();
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         });
+
     </script>
 
 </body>
