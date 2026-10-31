@@ -3,14 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#24243e">
+    <meta name="theme-color" content="#141419">
     <title>Toolbox</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
     <style>
+        /* ==========================================
+           PALETTE — dark theme neutre, accent cyan
+           ========================================== */
+        :root {
+            color-scheme: dark;
+            --bg-1: #1a1a21;
+            --bg-2: #0b0b0f;
+            --bg-3: #141419;
+            --text: #ececf1;
+            --text-mid: rgba(236, 236, 241, 0.7);
+            --text-dim: rgba(236, 236, 241, 0.45);
+            --text-faint: rgba(236, 236, 241, 0.3);
+            --surface: rgba(255, 255, 255, 0.035);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.18);
+            --accent: #22d3ee;
+            --accent-soft: rgba(34, 211, 238, 0.13);
+            --accent-border: rgba(34, 211, 238, 0.45);
+            --accent-glow: rgba(34, 211, 238, 0.16);
+            --gold: #f1c40f;
+            --panel: #101016;
+            --danger: #f87171;
+            --danger-bg: rgba(248, 113, 113, 0.06);
+            --danger-border: rgba(248, 113, 113, 0.5);
+            --warn: #fbbf24;
+            --warn-border: rgba(251, 191, 36, 0.5);
+        }
+
+        html { scrollbar-color: #2c2c35 #0b0b0f; }
+        ::selection { background: rgba(34, 211, 238, 0.25); }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+            color: var(--text);
             margin: 0;
             padding: 40px 20px;
             min-height: 100vh;
@@ -20,7 +52,7 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 30px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
             letter-spacing: 2px;
         }
 
@@ -30,11 +62,11 @@
             right: 20px;
             padding: 10px 15px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            background: var(--surface);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            color: rgba(255,255,255,0.6);
+            color: var(--text-mid);
             cursor: pointer;
             font-size: 0.9rem;
             z-index: 1000;
@@ -42,116 +74,163 @@
         }
         #saveBtn:hover {
             color: #fff;
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: var(--surface-hover);
+            border-color: var(--border-strong);
         }
 
         .search-container { max-width: 600px; margin: 0 auto 20px auto; position: relative; }
         .search-input {
             width: 100%; padding: 15px 25px; border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            background: var(--surface);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            color: #ffffff; font-size: 1rem; outline: none; box-sizing: border-box;
+            color: var(--text); font-size: 1rem; outline: none; box-sizing: border-box;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .search-input::placeholder { color: rgba(255, 255, 255, 0.4); }
-        .search-input:focus { border-color: rgba(168, 161, 246, 0.5); box-shadow: 0 0 20px rgba(168, 161, 246, 0.2); }
+        .search-input::placeholder { color: var(--text-dim); }
+        .search-input:focus { border-color: var(--accent-border); box-shadow: 0 0 20px var(--accent-glow); }
         .search-shortcut {
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 6px; padding: 2px 8px; font-size: 0.75rem; color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.08); border: 1px solid var(--border-strong);
+            border-radius: 6px; padding: 2px 8px; font-size: 0.75rem; color: var(--text-faint);
             pointer-events: none; transition: opacity 0.2s ease;
         }
         .search-input:focus ~ .search-shortcut { opacity: 0; }
 
-        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 12px; }
         .filter-btn {
             padding: 8px 16px; border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255,255,255,0.7); cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-mid); cursor: pointer;
             font-size: 0.85rem; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease; font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
-            background: rgba(168, 161, 246, 0.2);
-            border-color: rgba(168, 161, 246, 0.5); color: #fff;
+            background: var(--accent-soft);
+            border-color: var(--accent-border); color: #fff;
+        }
+
+        /* ==========================================
+           CHECKER DE LIENS — barre d'état + badges
+           ========================================== */
+        .link-check-bar { max-width: 1200px; margin: 0 auto 40px; text-align: center; font-size: 0.8rem; min-height: 26px; }
+        .lc-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+            border-radius: 14px; padding: 3px 12px; font-size: 0.75rem; cursor: pointer;
+            font-family: inherit; transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+        .lc-btn:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface); }
+        .lc-status { color: var(--text-dim); }
+        .lc-ok { color: rgba(52, 211, 153, 0.9); }
+        .lc-warn { color: var(--warn); font-weight: 500; }
+        .lc-list {
+            list-style: none; margin: 12px auto 0; padding: 10px 14px; max-width: 560px;
+            text-align: left; background: var(--panel); border: 1px solid var(--border);
+            border-radius: 12px; max-height: 240px; overflow-y: auto;
+        }
+        .lc-list li { display: flex; gap: 8px; padding: 4px 2px; font-size: 0.78rem; align-items: baseline; }
+        .lc-emoji { flex-shrink: 0; }
+        .lc-name { color: var(--text); font-weight: 500; }
+        .lc-meta { color: var(--text-dim); font-size: 0.7rem; margin-left: auto; text-align: right; }
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
         }
 
         .featured-container { max-width: 600px; margin: 0 auto 30px auto; opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease; }
         .featured-card {
-            background: rgba(168, 161, 246, 0.1);
-            border: 1px solid rgba(168, 161, 246, 0.4);
+            background: var(--accent-soft);
+            border: 1px solid var(--accent-border);
             padding: 25px; border-radius: 20px;
-            color: #ffffff; display: flex; align-items: center; gap: 20px;
+            color: var(--text); display: flex; align-items: center; gap: 20px;
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0 25px rgba(168, 161, 246, 0.2);
+            box-shadow: 0 0 25px var(--accent-glow);
+            position: relative;
         }
-        .featured-card:hover { background: rgba(168, 161, 246, 0.2); transform: translateY(-5px); box-shadow: 0 0 40px rgba(168, 161, 246, 0.5); }
-        .featured-link { display: flex; align-items: center; gap: 20px; text-decoration: none; color: #ffffff; flex: 1; min-width: 0; }
+        .featured-card:hover { background: rgba(34, 211, 238, 0.2); transform: translateY(-5px); box-shadow: 0 0 40px rgba(34, 211, 238, 0.35); }
+        .featured-link { display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--text); flex: 1; min-width: 0; }
         .featured-icon { width: 50px; height: 50px; border-radius: 12px; flex-shrink: 0; }
         .featured-text { text-align: left; min-width: 0; }
         .featured-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 5px; }
-        .featured-desc { font-size: 0.9rem; color: #d0cdf7; }
+        .featured-desc { font-size: 0.9rem; color: rgba(236, 236, 241, 0.75); }
 
         .featured-flex-container { max-width: 1200px; margin: 0 auto 60px auto; display: flex; gap: 20px; flex-wrap: wrap; opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease; }
         .featured-flex-container .featured-card { flex: 1; min-width: 280px; }
 
-        .category { margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease; }
-        .category h2 { font-size: 1.1rem; color: #a8a1f6; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; padding-left: 10px; border-left: 4px solid #a8a1f6; display: flex; align-items: baseline; gap: 10px; }
-        .tool-count { font-size: 0.75rem; color: rgba(168, 161, 246, 0.5); font-weight: 400; letter-spacing: 0; text-transform: none; }
+        .category {
+            margin-bottom: 50px; max-width: 1200px; margin-left: auto; margin-right: auto;
+            opacity: 1; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease;
+            content-visibility: auto; contain-intrinsic-size: auto 600px;
+        }
+        .category h2 { font-size: 1.1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; padding-left: 10px; border-left: 4px solid var(--accent); display: flex; align-items: baseline; gap: 10px; }
+        .tool-count { font-size: 0.75rem; color: rgba(34, 211, 238, 0.55); font-weight: 400; letter-spacing: 0; text-transform: none; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
 
         .tool-card-wrapper {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--surface);
+            border: 1px solid var(--border);
             padding: 15px; border-radius: 16px;
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
             position: relative;
             display: flex; align-items: center; justify-content: space-between; gap: 5px;
         }
-        .tool-card-wrapper:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.3); }
+        .tool-card-wrapper:hover { background: var(--surface-hover); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); border-color: var(--border-strong); }
 
         .tool-card {
             display: flex; align-items: center; gap: 15px;
-            text-decoration: none; color: #ffffff;
+            text-decoration: none; color: var(--text);
             flex-grow: 1; min-width: 0;
         }
 
-        .tool-icon { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: rgba(255, 255, 255, 0.1); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); flex-shrink: 0; }
+        .tool-icon { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: rgba(255, 255, 255, 0.08); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); flex-shrink: 0; }
 
         .tool-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
         .tool-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .tool-desc { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-desc { font-size: 0.75rem; color: var(--text-dim); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .fav-btn {
             background: transparent; border: none; cursor: pointer;
-            color: rgba(255,255,255,0.3); font-size: 1.2rem;
+            color: var(--text-faint); font-size: 1.2rem;
             padding: 5px; transition: color 0.3s ease, transform 0.3s ease; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
         }
-        .fav-btn:hover { color: #f1c40f; transform: scale(1.2); }
-        .fav-btn.active { color: #f1c40f; }
+        .fav-btn:hover { color: var(--gold); transform: scale(1.2); }
+        .fav-btn.active { color: var(--gold); }
 
         .tooltip {
             position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(5px);
-            background: #1a1a2e; color: #fff; padding: 6px 12px; border-radius: 8px;
+            background: var(--panel); color: #fff; padding: 6px 12px; border-radius: 8px;
             font-size: 0.8rem; max-width: 220px; width: max-content; text-align: center;
             pointer-events: none; opacity: 0; visibility: hidden;
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid rgba(168, 161, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid rgba(255, 255, 255, 0.12);
             word-wrap: break-word;
         }
         .tooltip::after {
             content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-            border: 6px solid transparent; border-top-color: #1a1a2e;
+            border: 6px solid transparent; border-top-color: var(--panel);
         }
         .tool-card-wrapper:hover .tooltip,
         .tool-card-wrapper:focus-within .tooltip {
             opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
         }
+
+        /* États "lien mort / muet" posés après les règles normales pour garder la priorité au hover */
+        .tool-card-wrapper.link-dead, .featured-card.link-dead { border-color: var(--danger-border); background: var(--danger-bg); }
+        .tool-card-wrapper.link-slow, .featured-card.link-slow { border-color: var(--warn-border); }
+        .tool-card-wrapper.link-dead::after, .featured-card.link-dead::after,
+        .tool-card-wrapper.link-slow::after, .featured-card.link-slow::after {
+            content: '';
+            position: absolute; top: -7px; right: -7px;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 700; z-index: 5;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+        .tool-card-wrapper.link-dead::after, .featured-card.link-dead::after { content: '✕'; background: #ef4444; color: #fff; }
+        .tool-card-wrapper.link-slow::after, .featured-card.link-slow::after { content: '⏱'; background: var(--warn); color: #1a1a21; font-size: 9px; font-weight: 400; }
 
         .no-results {
             text-align: center; padding: 80px 20px;
@@ -159,24 +238,24 @@
             transition: opacity 0.25s ease, transform 0.25s ease;
         }
         .no-results-emoji { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
-        .no-results-text { font-size: 1.1rem; color: rgba(255,255,255,0.4); }
-        .no-results-term { color: rgba(168, 161, 246, 0.8); font-weight: 500; }
+        .no-results-text { font-size: 1.1rem; color: var(--text-dim); }
+        .no-results-term { color: rgba(34, 211, 238, 0.85); font-weight: 500; }
 
         #backToTop {
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%;
-            background: rgba(168, 161, 246, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(168, 161, 246, 0.4); color: white; font-size: 1.5rem; cursor: pointer;
+            background: var(--accent-soft); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-border); color: white; font-size: 1.5rem; cursor: pointer;
             display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease, background 0.3s ease, transform 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
         }
         #backToTop.show { opacity: 1; visibility: visible; }
-        #backToTop:hover { background: rgba(168, 161, 246, 0.4); transform: translateY(-3px); }
+        #backToTop:hover { background: rgba(34, 211, 238, 0.28); transform: translateY(-3px); }
 
         /* Accessibilité clavier */
         .tool-card:focus-visible, .featured-link:focus-visible, .filter-btn:focus-visible,
-        .fav-btn:focus-visible, #saveBtn:focus-visible, #backToTop:focus-visible {
-            outline: 2px solid rgba(168, 161, 246, 0.8);
+        .fav-btn:focus-visible, #saveBtn:focus-visible, #backToTop:focus-visible, .lc-btn:focus-visible {
+            outline: 2px solid rgba(34, 211, 238, 0.65);
             outline-offset: 2px;
         }
 
@@ -189,11 +268,13 @@
             }
         }
 
-        /* Petits écrans : évite le chevauchement h1 / bouton Save */
+        /* Petits écrans : Save masqué (peu utile sur mobile), plus besoin de dégager le haut */
         @media (max-width: 600px) {
-            body { padding: 80px 15px 40px; }
+            body { padding: 40px 15px 40px; }
             h1 { font-size: 2rem; letter-spacing: 1px; }
+            #saveBtn { display: none; }
             #backToTop { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+            .lc-list { max-height: 200px; }
         }
     </style>
 </head>
@@ -209,6 +290,12 @@
         </div>
 
         <div class="filter-container" id="filter-container"></div>
+
+        <div id="link-check-bar" class="link-check-bar">
+            <span id="link-check-live" class="sr-only" role="status" aria-live="polite"></span>
+            <span id="link-check-main"></span>
+        </div>
+
         <div id="featured-container" class="featured-container"></div>
         <div id="featured-flex-container" class="featured-flex-container"></div>
 
@@ -279,6 +366,7 @@
                 { name: "WCO TV (Cartoons)", url: "https://www.wco.tv/", shortDesc: "Cartoons", fullDesc: "regarder cartoon dessin animé" },
                 { name: "Anikoto", url: "https://anikototv.to/", shortDesc: "Anime HQ", fullDesc: "regarder anime haute qualité" },
                 { name: "Miruro", url: "https://www.miruro.tv/", shortDesc: "Streaming Anime", fullDesc: "regarder anime streaming" },
+                { name: "Animex", url: "https://animex.one/", shortDesc: "Anime HD sans pubs", fullDesc: "regarder anime streaming hd vostfr sub dub sans pub watchlist synchronisation multi-appareils" },
                 { name: "MangaDex", url: "https://mangadex.org/", shortDesc: "Scans traduits", fullDesc: "lire manga scan traduction" },
                 { name: "SushiScan", url: "https://sushiscan.net/", shortDesc: "Manga FR", fullDesc: "manga scan français" },
                 { name: "MangaCodex", url: "https://mangacodex.com/", shortDesc: "Stats & Ventes Manga", fullDesc: "classement oricon ventes manga dvd blu-ray statistiques auteurs" },
@@ -307,7 +395,6 @@
                 { name: "AniPlaylist", url: "https://aniplaylist.com/", shortDesc: "Musiques Animes", fullDesc: "trouver chansons animes spotify apple music deezer" }
             ]},
             { category: "Images", icon: "🖼️", filterText: "Images", title: "Images & Émojis", tools: [
-                { name: "Compressor", url: "https://8mb.video/", shortDesc: "Compresser vidéo", fullDesc: "compresser vidéo discord limite poids" },
                 { name: "Émojis Nitro", url: "https://imageclipboard.com/", shortDesc: "Emojis Discord", fullDesc: "emoji nitro discord gratuit" },
                 { name: "Emojipedia", url: "https://emojipedia.org/symbols", shortDesc: "Symboles/Emojis", fullDesc: "signes symboles emoji copier coller" },
                 { name: "Reverse Image", url: "https://saucenao.com/", shortDesc: "Trouver la source", fullDesc: "trouver source image reverse search" },
@@ -328,7 +415,8 @@
                 { name: "ThisAnimeDoesNotExist", url: "https://thisanimedoesnotexist.ai/", shortDesc: "Images IA Anime", fullDesc: "images animes mangas générées ia" },
                 { name: "Topsters", url: "https://topsters.org/", shortDesc: "Créer des tops", fullDesc: "créer topsters top image collage favoris carré musique film jeux" },
                 { name: "Free Vintage Illus.", url: "https://freevintageillustrations.com/illustrations", shortDesc: "Art rétro libre", fullDesc: "illustrations vintage domaine public gratuites rétro art classique gravures" },
-                { name: "Another Graphic", url: "https://anothergraphic.org/", shortDesc: "Design & typo", fullDesc: "archive design graphique typographie inspiration créative œuvres choisies" }
+                { name: "Another Graphic", url: "https://anothergraphic.org/", shortDesc: "Design & typo", fullDesc: "archive design graphique typographie inspiration créative œuvres choisies" },
+                { name: "Inspiration Artistique", url: "https://www.are.na/consumer-aesthetics-research-institute/channels", shortDesc: "Moodboard design", fullDesc: "inspiration design artistique moodboard" }
             ]},
             { category: "Hébergement", icon: "☁️", filterText: "Upload", title: "Hébergement & Upload", tools: [
                 { name: "Zupimages", url: "https://www.zupimages.net/", shortDesc: "Héberger image", fullDesc: "héberger image en ligne" },
@@ -368,6 +456,7 @@
                 { name: "SimplePDF", url: "https://simplepdf.com/fr", shortDesc: "Éditer PDF", fullDesc: "éditer pdf modifier texte" },
                 { name: "Sejda", url: "https://www.sejda.com/fr/pdf-editor", shortDesc: "Modifier PDF", fullDesc: "modifier pdf ajouter image signature" },
                 { name: "Multi-Convertisseur", url: "https://p2r3.github.io/convert/", shortDesc: "Convertir fichiers", fullDesc: "convertir format fichier" },
+                { name: "Compressor", url: "https://8mb.video/", shortDesc: "Compresser vidéo", fullDesc: "compresser vidéo discord limite poids" },
                 { name: "DeepL", url: "https://www.deepl.com/translator", shortDesc: "Traduction IA", fullDesc: "traduire texte langue ia" },
                 { name: "Caractère Invisible", url: "https://www.editpad.org/tool/fr/caractere-invisible", shortDesc: "Espace vide", fullDesc: "copier caractère vide espace" },
                 { name: "Check Short URL", url: "https://checkshorturl.com/", shortDesc: "Dévoiler lien", fullDesc: "dévoiler lien raccourci url vraie destination" },
@@ -405,8 +494,7 @@
             { category: "IA", icon: "🧠", filterText: "IA", title: "IA & Recherche", tools: [
                 { name: "Z.AI", url: "https://chat.z.ai/", shortDesc: "IA pour coder", fullDesc: "ia ultra performante pour coder gratuite" },
                 { name: "Perplexity AI", url: "https://www.perplexity.ai/", shortDesc: "Recherche IA", fullDesc: "moteur recherche intelligence artificielle sources" },
-                { name: "NotebookLM", url: "https://notebooklm.google.com/notebook/f52081b7-75e1-40e5-ba1c-c577d9019d78", shortDesc: "Résumer vidéos/livres", fullDesc: "résumer vidéos/livres ia google" },
-                { name: "Inspiration Artistique", url: "https://www.are.na/consumer-aesthetics-research-institute/channels", shortDesc: "Moodboard design", fullDesc: "inspiration design artistique moodboard" }
+                { name: "NotebookLM", url: "https://notebooklm.google.com/notebook/f52081b7-75e1-40e5-ba1c-c577d9019d78", shortDesc: "Résumer vidéos/livres", fullDesc: "résumer vidéos/livres ia google" }
             ]},
             { category: "Divers", icon: "🗂️", filterText: "Divers", title: "Divers & Curiosités", tools: [
                 { name: "Palmarès Exécutions", url: "https://web.archive.org/web/20151024173003/http://guillotine.voila.net:80/Palmares1871_1977.html", shortDesc: "Histoire France", fullDesc: "histoire france exécution capitale" },
@@ -637,13 +725,223 @@
         }
 
         // Démarrage : restaure le filtre indiqué dans l'URL (#musique, #favoris…)
-        const initialFilter = decodeURIComponent(location.hash.slice(1));
+        // try/catch : un hash malformé (#%…) ne doit jamais faire planter la page
+        let initialFilter = '';
+        try {
+            initialFilter = decodeURIComponent(location.hash.slice(1));
+        } catch (e) {
+            initialFilter = '';
+        }
         if (initialFilter === 'Favoris' || toolsData.some(c => c.category === initialFilter)) {
             state.filter = initialFilter;
         }
         renderFilters();
         renderCards();
         update();
+
+        // ==========================================
+        // CHECKER DE LIENS MORTS
+        // (no-cors : détecte les domaines injoignables et les muets ;
+        //  ne peut pas lire les codes HTTP — limite assumée du 100% navigateur)
+        // ==========================================
+        const CHECK_STORAGE_KEY = 'toolboxLinkCheck';
+        const CHECK_TTL_MS = 7 * 24 * 60 * 60 * 1000;   // re-vérif auto au-delà de 7 jours
+        const CHECK_TIMEOUT_MS = 6000;                   // délai avant de déclarer un site "muet"
+        const CHECK_CONCURRENCY = 6;                     // requêtes parallèles max
+        const PROBE_ORIGINS = ['https://www.gstatic.com', 'https://www.cloudflare.com'];
+
+        let checking = false;
+        let lastCheck = null;   // { ts, results: { [origin]: 'ok' | 'dead' | 'slow' } }
+        let listOpen = true;    // liste des suspects dépliée par défaut
+
+        const lcBarLive = document.getElementById('link-check-live');
+        const lcBarMain = document.getElementById('link-check-main');
+
+        function originOf(url) {
+            try { return new URL(url).origin; } catch (e) { return url; }
+        }
+
+        function allToolURLs() {
+            return [
+                ...featuredData.map(t => t.url),
+                ...featuredFlexData.map(t => t.url),
+                ...toolsData.flatMap(c => c.tools.map(t => t.url))
+            ];
+        }
+
+        function timeAgo(ts) {
+            const min = Math.floor((Date.now() - ts) / 60000);
+            if (min < 1) return "à l'instant";
+            if (min < 60) return `il y a ${min} min`;
+            const h = Math.floor(min / 60);
+            if (h < 24) return `il y a ${h} h`;
+            return `il y a ${Math.floor(h / 24)} j`;
+        }
+
+        function readCheckCache() {
+            try {
+                const c = JSON.parse(localStorage.getItem(CHECK_STORAGE_KEY));
+                if (c && c.ts && c.results) return c;
+            } catch (e) {}
+            return null;
+        }
+
+        // Teste une origine : 'ok' (répond), 'dead' (DNS mort / refus), 'slow' (timeout)
+        // Les liens en http:// sont d'abord tentés en https (contenu mixte), puis en http
+        function checkLink(origin) {
+            const attempt = url => new Promise(resolve => {
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), CHECK_TIMEOUT_MS);
+                fetch(url, { mode: 'no-cors', signal: ctrl.signal })
+                    .then(() => { clearTimeout(timer); resolve('ok'); })
+                    .catch(err => { clearTimeout(timer); resolve(err.name === 'AbortError' ? 'slow' : 'dead'); });
+            });
+            if (origin.startsWith('http://')) {
+                return attempt(origin.replace('http://', 'https://'))
+                    .then(r => r === 'ok' ? r : attempt(origin));
+            }
+            return attempt(origin);
+        }
+
+        // File d'exécution à concurrence limitée
+        async function runPool(items, worker, concurrency) {
+            const queue = [...items];
+            const runners = Array.from({ length: Math.min(concurrency, queue.length) }, async () => {
+                while (queue.length) {
+                    const item = queue.shift();
+                    await worker(item);
+                }
+            });
+            await Promise.all(runners);
+        }
+
+        // Applique les statuts aux cartes (badges + info dans le tooltip)
+        function applyStatusesToCards(results) {
+            document.querySelectorAll('.tool-card-wrapper, .featured-card').forEach(card => {
+                const status = results[originOf(card.dataset.url)];
+                card.classList.toggle('link-dead', status === 'dead');
+                card.classList.toggle('link-slow', status === 'slow');
+                const tip = card.querySelector('.tooltip');
+                if (tip) {
+                    if (!tip.dataset.base) tip.dataset.base = tip.textContent;
+                    tip.textContent = (status === 'dead' || status === 'slow')
+                        ? `${status === 'dead' ? '⛔ Injoignable' : '⏱ Sans réponse'} à la dernière vérification — ${tip.dataset.base}`
+                        : tip.dataset.base;
+                }
+            });
+        }
+
+        function buildSuspectRows(results) {
+            const rows = [];
+            const add = (t, cat) => {
+                const st = results[originOf(t.url)];
+                if (st === 'dead' || st === 'slow') rows.push({ st, name: t.name, domain: getDomain(t.url), cat });
+            };
+            featuredData.forEach(t => add(t, 'Featured'));
+            featuredFlexData.forEach(t => add(t, 'Featured'));
+            toolsData.forEach(c => c.tools.forEach(t => add(t, c.category)));
+            rows.sort((a, b) => (a.st === b.st ? a.name.localeCompare(b.name) : (a.st === 'dead' ? -1 : 1)));
+            return rows;
+        }
+
+        function setLive(text) {
+            lcBarLive.textContent = text;
+        }
+
+        function setBar(mode, total) {
+            if (mode === 'idle') {
+                lcBarMain.innerHTML = `<button class="lc-btn" data-action="rerun">🩺 Vérifier les liens</button>`;
+            } else if (mode === 'checking') {
+                lcBarMain.innerHTML = `<span class="lc-status">🔄 Vérification des liens en cours… <span class="lc-count" aria-hidden="true">0/${total ?? '…'}</span></span>`;
+            } else if (mode === 'impossible') {
+                lcBarMain.innerHTML = `<span class="lc-warn">⚠️ Vérification impossible — réseau bloqué ou hors ligne</span> <button class="lc-btn" data-action="rerun">Réessayer</button>`;
+            } else if (mode === 'done' && lastCheck) {
+                const rows = buildSuspectRows(lastCheck.results);
+                const dead = rows.filter(r => r.st === 'dead').length;
+                const slow = rows.length - dead;
+                const checked = Object.keys(lastCheck.results).length;
+                const when = timeAgo(lastCheck.ts);
+                if (dead === 0 && slow === 0) {
+                    lcBarMain.innerHTML = `<span class="lc-ok">✅ ${checked} liens répondent · ${when}</span> <button class="lc-btn" data-action="rerun">Re-vérifier</button>`;
+                } else {
+                    let html = `<span class="lc-warn">⛔ ${dead} injoignable${dead > 1 ? 's' : ''}${slow ? ` · ⏱ ${slow} sans réponse` : ''} · ${when}</span> <button class="lc-btn" data-action="rerun">Re-vérifier</button> <button class="lc-btn" data-action="toggle">${listOpen ? 'Masquer' : 'Voir'}</button>`;
+                    if (listOpen) {
+                        html += `<ul class="lc-list">` + rows.map(r =>
+                            `<li><span class="lc-emoji">${r.st === 'dead' ? '⛔' : '⏱'}</span><span class="lc-name">${esc(r.name)}</span><span class="lc-meta">${esc(r.domain)}${r.cat ? ' · ' + esc(r.cat) : ''}</span></li>`
+                        ).join('') + `</ul>`;
+                    }
+                    lcBarMain.innerHTML = html;
+                }
+            }
+        }
+
+        function updateProgress(done, total) {
+            const el = document.querySelector('.lc-count');
+            if (el) el.textContent = `${done}/${total}`;
+        }
+
+        async function runLinkCheck() {
+            if (checking) return;
+            checking = true;
+
+            const origins = [...new Set(allToolURLs().map(originOf))];
+            setBar('checking', origins.length);
+            setLive('Vérification des liens en cours.');
+
+            // Sonde réseau : si même les sites étalons ne répondent pas,
+            // on ne marque rien (évite les faux positifs massifs)
+            const probes = await Promise.all(PROBE_ORIGINS.map(o => checkLink(o)));
+            if (!probes.includes('ok')) {
+                checking = false;
+                setBar(lastCheck ? 'done' : 'impossible');
+                if (!lastCheck) setLive('Vérification des liens impossible.');
+                return;
+            }
+
+            const results = {};
+            let done = 0;
+            applyStatusesToCards(results); // reset des badges existants
+
+            await runPool(origins, async (origin) => {
+                results[origin] = await checkLink(origin);
+                done++;
+                updateProgress(done, origins.length);
+                applyStatusesToCards(results); // badges progressifs
+            }, CHECK_CONCURRENCY);
+
+            lastCheck = { ts: Date.now(), results };
+            try {
+                localStorage.setItem(CHECK_STORAGE_KEY, JSON.stringify(lastCheck));
+            } catch (e) {}
+
+            checking = false;
+            applyStatusesToCards(results);
+            setBar('done');
+            const suspects = buildSuspectRows(results).length;
+            setLive(suspects === 0
+                ? 'Vérification terminée : tous les liens répondent.'
+                : `Vérification terminée : ${suspects} liens suspects.`);
+        }
+
+        // Interactions de la barre (délégation)
+        document.getElementById('link-check-bar').addEventListener('click', e => {
+            const btn = e.target.closest('[data-action]');
+            if (!btn) return;
+            if (btn.dataset.action === 'rerun') runLinkCheck();
+            else if (btn.dataset.action === 'toggle') {
+                listOpen = !listOpen;
+                setBar('done');
+            }
+        });
+
+        // Initialisation du checker : cache affiché immédiatement,
+        // re-vérif auto en arrière-plan si les résultats ont plus de 7 jours
+        lastCheck = readCheckCache();
+        if (lastCheck) applyStatusesToCards(lastCheck.results);
+        setBar(lastCheck ? 'done' : 'idle');
+        if (!lastCheck || Date.now() - lastCheck.ts > CHECK_TTL_MS) {
+            setTimeout(() => runLinkCheck(), 1500);
+        }
 
         // ==========================================
         // ÉVÉNEMENTS (délégation unique)
