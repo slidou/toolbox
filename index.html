@@ -132,6 +132,13 @@
         .lc-emoji { flex-shrink: 0; }
         .lc-name { color: var(--text); font-weight: 500; }
         .lc-meta { color: var(--text-dim); font-size: 0.7rem; margin-left: auto; text-align: right; }
+        .lc-trust {
+            background: transparent; border: 1px solid var(--border); color: var(--text-faint);
+            border-radius: 10px; padding: 1px 8px; font-size: 0.68rem; cursor: pointer;
+            font-family: inherit; flex-shrink: 0; transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .lc-trust:hover { color: rgba(52, 211, 153, 0.9); border-color: rgba(52, 211, 153, 0.5); }
+        .lc-hint { max-width: 560px; margin: 8px auto 0; font-size: 0.7rem; color: var(--text-faint); }
         .sr-only {
             position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
             overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -189,6 +196,17 @@
         .tool-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
         .tool-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .tool-desc { font-size: 0.75rem; color: var(--text-dim); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* Badges des repos GitHub (étoiles + langage) */
+        .repo-badges { display: inline-flex; align-items: center; gap: 5px; margin-top: 3px; }
+        .repo-badges .rb {
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: 0.65rem; color: var(--text-dim);
+            padding: 1px 8px; border-radius: 999px;
+            background: var(--surface); border: 1px solid var(--border);
+        }
+        .repo-badges .rb-stars { color: var(--gold); }
+        .repo-badges .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
         .fav-btn {
             background: transparent; border: none; cursor: pointer;
@@ -491,6 +509,9 @@
                 { name: "Parse.bot", url: "https://www.parse.bot/", shortDesc: "Site vers API", fullDesc: "transformer site web api scraper développeur" },
                 { name: "Social Panel", url: "https://anothersocialpanel.com/new_order", shortDesc: "Boost stats", fullDesc: "augmenter abonnés likes vues statistiques" }
             ]},
+            { category: "GitHub", icon: "🐙", filterText: "GitHub", title: "Repos GitHub & Open Source", tools: [
+                { name: "Complete Recent Discord Quest", url: "https://gist.github.com/aamiaa/204cd9d42013ded9faf646fae7f89fbb", shortDesc: "discord quests/quêtes", fullDesc: "débloquer les quêtes discord sans rien faire" }
+            ]},
             { category: "IA", icon: "🧠", filterText: "IA", title: "IA & Recherche", tools: [
                 { name: "Z.AI", url: "https://chat.z.ai/", shortDesc: "IA pour coder", fullDesc: "ia ultra performante pour coder gratuite" },
                 { name: "Perplexity AI", url: "https://www.perplexity.ai/", shortDesc: "Recherche IA", fullDesc: "moteur recherche intelligence artificielle sources" },
@@ -579,15 +600,46 @@
                 </div>`;
         }
 
+        // Avatar du propriétaire pour les liens de repos GitHub
+        // (plus parlant que le logo GitHub générique)
+        function repoAvatar(url) {
+            const m = String(url).match(/^https:\/\/github\.com\/([A-Za-z0-9_.-]+)\/[A-Za-z0-9_.-]+\/?$/);
+            return m ? `https://github.com/${m[1]}.png?size=64` : null;
+        }
+
+        const GH_LANG_COLORS = {
+            JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5', Go: '#00ADD8',
+            Rust: '#dea584', C: '#555555', 'C++': '#f34b7d', Java: '#b07219', 'C#': '#178600',
+            Shell: '#89e051', HTML: '#e34c26', CSS: '#563d7c', PHP: '#4F5D95', Ruby: '#701516',
+            Vue: '#41b883', Svelte: '#ff3e00', Clojure: '#db5855', Dart: '#00B4AB', Zig: '#ec915c',
+            Lua: '#000080', Haskell: '#5e5086', MDX: '#fcb32c', 'Jupyter Notebook': '#DA5B0B',
+            Makefile: '#427819', Nix: '#7e7eff', Markdown: '#083fa1'
+        };
+
+        function formatStars(n) {
+            if (typeof n !== 'number' || isNaN(n)) return '';
+            if (n < 1000) return String(n);
+            if (n < 10000) return (n / 1000).toFixed(1).replace('.', ',') + 'k';
+            return Math.round(n / 1000) + 'k';
+        }
+
+        function repoBadgesHTML(t) {
+            if (!t.stars && !t.lang) return '';
+            const stars = t.stars ? `<span class="rb rb-stars">★ ${formatStars(t.stars)}</span>` : '';
+            const lang = t.lang ? `<span class="rb rb-lang"><span class="dot" style="background:${GH_LANG_COLORS[t.lang] || '#8b8b8b'}"></span>${esc(t.lang)}</span>` : '';
+            return `<span class="repo-badges" data-repo-url="${esc(t.url)}">${stars}${lang}</span>`;
+        }
+
         function toolCardHTML(t, cat) {
-            const search = normalize(`${t.name} ${t.shortDesc} ${t.fullDesc} ${cat.category}`);
+            const search = normalize(`${t.name} ${t.shortDesc} ${t.fullDesc} ${cat.category} ${t.lang || ''}`);
             return `
                 <div class="tool-card-wrapper" data-url="${esc(t.url)}" data-search="${esc(search)}">
                     <a href="${esc(t.url)}" target="_blank" rel="noopener noreferrer" class="tool-card">
-                        <img src="${faviconURL(getDomain(t.url))}" alt="${esc(t.name)}" class="tool-icon" loading="lazy" decoding="async">
+                        <img src="${repoAvatar(t.url) || faviconURL(getDomain(t.url))}" alt="${esc(t.name)}" class="tool-icon" loading="lazy" decoding="async">
                         <div class="tool-info">
                             <span class="tool-name">${esc(t.name)}</span>
                             <span class="tool-desc">${esc(t.shortDesc)}</span>
+                            ${repoBadgesHTML(t)}
                         </div>
                     </a>
                     ${favBtnHTML(t.url)}
@@ -744,15 +796,30 @@
         // (no-cors : détecte les domaines injoignables et les muets ;
         //  ne peut pas lire les codes HTTP — limite assumée du 100% navigateur)
         // ==========================================
-        const CHECK_STORAGE_KEY = 'toolboxLinkCheck';
+        const CHECK_STORAGE_KEY = 'toolboxLinkCheck.v2';
+        const WHITELIST_KEY = 'toolboxLinkWhitelist';
         const CHECK_TTL_MS = 7 * 24 * 60 * 60 * 1000;   // re-vérif auto au-delà de 7 jours
-        const CHECK_TIMEOUT_MS = 6000;                   // délai avant de déclarer un site "muet"
-        const CHECK_CONCURRENCY = 6;                     // requêtes parallèles max
+        const CHECK_TIMEOUT_MS = 10000;                  // délai avant "sans réponse" (les sites lents existent)
+        const CHECK_RETRY_MS = 1500;                     // pause entre les 2 tentatives d'un domaine
+        const FAST_FAIL_MS = 3000;                       // rejet < 3 s = domaine vraiment refusé
+        const CHECK_CONCURRENCY = 4;                     // requêtes parallèles max
         const PROBE_ORIGINS = ['https://www.gstatic.com', 'https://www.cloudflare.com'];
+        const ADBAIT_URL = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
 
         let checking = false;
-        let lastCheck = null;   // { ts, results: { [origin]: 'ok' | 'dead' | 'slow' } }
-        let listOpen = true;    // liste des suspects dépliée par défaut
+        let lastCheck = null;        // { ts, results: { [origin]: 'ok' | 'dead' | 'slow' } }
+        let listOpen = true;         // liste des suspects dépliée par défaut
+        let adblockSuspected = false;
+
+        // Whitelist "✓ ça marche" : domaines exclus des signalements
+        // (un bloqueur de pubs ou un DNS filtrant peut faire échouer la
+        //  vérification d'un site qui fonctionne parfaitement)
+        let linkWhitelist = [];
+        try { linkWhitelist = JSON.parse(localStorage.getItem(WHITELIST_KEY)) || []; } catch (e) {}
+        const isWhitelisted = origin => linkWhitelist.includes(origin);
+        function saveWhitelist() {
+            try { localStorage.setItem(WHITELIST_KEY, JSON.stringify(linkWhitelist)); } catch (e) {}
+        }
 
         const lcBarLive = document.getElementById('link-check-live');
         const lcBarMain = document.getElementById('link-check-main');
@@ -786,21 +853,39 @@
             return null;
         }
 
-        // Teste une origine : 'ok' (répond), 'dead' (DNS mort / refus), 'slow' (timeout)
-        // Les liens en http:// sont d'abord tentés en https (contenu mixte), puis en http
+        // Teste une origine : 'ok' (répond), 'dead' (2 rejets rapides consécutifs
+        // = DNS mort / connexion refusée), 'slow' (timeout ou rejet lent — trop
+        // incertain pour crier au loup). Les liens en http:// sont d'abord
+        // tentés en https (contenu mixte), puis en http.
         function checkLink(origin) {
+            // Une tentative : 'ok' | 'slow' | 'refused'
             const attempt = url => new Promise(resolve => {
                 const ctrl = new AbortController();
+                const t0 = performance.now();
                 const timer = setTimeout(() => ctrl.abort(), CHECK_TIMEOUT_MS);
-                fetch(url, { mode: 'no-cors', signal: ctrl.signal })
+                fetch(url, { mode: 'no-cors', cache: 'no-store', credentials: 'omit', signal: ctrl.signal })
                     .then(() => { clearTimeout(timer); resolve('ok'); })
-                    .catch(err => { clearTimeout(timer); resolve(err.name === 'AbortError' ? 'slow' : 'dead'); });
+                    .catch(err => {
+                        clearTimeout(timer);
+                        if (err.name === 'AbortError') return resolve('slow');
+                        // Rejet quasi instantané = domaine refusé ; rejet lent = réseau capricieux
+                        resolve(performance.now() - t0 < FAST_FAIL_MS ? 'refused' : 'slow');
+                    });
             });
+            // Deux tentatives espacées : seul le double rejet rapide mérite 'dead'
+            const run = async url => {
+                const r1 = await attempt(url);
+                if (r1 === 'ok') return 'ok';
+                await new Promise(r => setTimeout(r, CHECK_RETRY_MS));
+                const r2 = await attempt(url);
+                if (r2 === 'ok') return 'ok';
+                return (r1 === 'refused' && r2 === 'refused') ? 'dead' : 'slow';
+            };
             if (origin.startsWith('http://')) {
-                return attempt(origin.replace('http://', 'https://'))
-                    .then(r => r === 'ok' ? r : attempt(origin));
+                return run(origin.replace('http://', 'https://'))
+                    .then(r => r === 'ok' ? r : run(origin));
             }
-            return attempt(origin);
+            return run(origin);
         }
 
         // File d'exécution à concurrence limitée
@@ -818,7 +903,8 @@
         // Applique les statuts aux cartes (badges + info dans le tooltip)
         function applyStatusesToCards(results) {
             document.querySelectorAll('.tool-card-wrapper, .featured-card').forEach(card => {
-                const status = results[originOf(card.dataset.url)];
+                const origin = originOf(card.dataset.url);
+                const status = isWhitelisted(origin) ? undefined : results[origin];
                 card.classList.toggle('link-dead', status === 'dead');
                 card.classList.toggle('link-slow', status === 'slow');
                 const tip = card.querySelector('.tooltip');
@@ -834,8 +920,10 @@
         function buildSuspectRows(results) {
             const rows = [];
             const add = (t, cat) => {
-                const st = results[originOf(t.url)];
-                if (st === 'dead' || st === 'slow') rows.push({ st, name: t.name, domain: getDomain(t.url), cat });
+                const origin = originOf(t.url);
+                if (isWhitelisted(origin)) return;
+                const st = results[origin];
+                if (st === 'dead' || st === 'slow') rows.push({ st, name: t.name, domain: getDomain(t.url), cat, origin });
             };
             featuredData.forEach(t => add(t, 'Featured'));
             featuredFlexData.forEach(t => add(t, 'Featured'));
@@ -867,8 +955,12 @@
                     let html = `<span class="lc-warn">⛔ ${dead} injoignable${dead > 1 ? 's' : ''}${slow ? ` · ⏱ ${slow} sans réponse` : ''} · ${when}</span> <button class="lc-btn" data-action="rerun">Re-vérifier</button> <button class="lc-btn" data-action="toggle">${listOpen ? 'Masquer' : 'Voir'}</button>`;
                     if (listOpen) {
                         html += `<ul class="lc-list">` + rows.map(r =>
-                            `<li><span class="lc-emoji">${r.st === 'dead' ? '⛔' : '⏱'}</span><span class="lc-name">${esc(r.name)}</span><span class="lc-meta">${esc(r.domain)}${r.cat ? ' · ' + esc(r.cat) : ''}</span></li>`
+                            `<li><span class="lc-emoji">${r.st === 'dead' ? '⛔' : '⏱'}</span><span class="lc-name">${esc(r.name)}</span><span class="lc-meta">${esc(r.domain)}${r.cat ? ' · ' + esc(r.cat) : ''}</span><button class="lc-trust" data-action="trust" data-origin="${esc(r.origin)}" title="Le site marche chez moi — ne plus jamais le signaler">✓ ça marche</button></li>`
                         ).join('') + `</ul>`;
+                        const hint = adblockSuspected
+                            ? "Bloqueur de pubs détecté : certains ⛔ peuvent être des faux positifs. « ✓ ça marche » exclut un lien définitivement."
+                            : "Signalé à tort ? Un bloqueur (uBlock, Brave…) ou un DNS filtrant peut empêcher la vérification d'un site qui fonctionne. « ✓ ça marche » l'exclut définitivement.";
+                        html += `<div class="lc-hint">${hint}</div>`;
                     }
                     lcBarMain.innerHTML = html;
                 }
@@ -884,7 +976,7 @@
             if (checking) return;
             checking = true;
 
-            const origins = [...new Set(allToolURLs().map(originOf))];
+            const origins = [...new Set(allToolURLs().map(originOf))].filter(o => !isWhitelisted(o));
             setBar('checking', origins.length);
             setLive('Vérification des liens en cours.');
 
@@ -897,6 +989,17 @@
                 if (!lastCheck) setLive('Vérification des liens impossible.');
                 return;
             }
+
+            // Sonde bloqueur de pubs : l'appât publicitaire est rejeté alors
+            // que le réseau marche → un bloqueur filtre les requêtes du navigateur
+            // et peut transformer des sites sains en faux ⛔
+            adblockSuspected = await new Promise(resolve => {
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(), 4000);
+                fetch(ADBAIT_URL, { mode: 'no-cors', signal: ctrl.signal })
+                    .then(() => { clearTimeout(timer); resolve(false); })
+                    .catch(() => { clearTimeout(timer); resolve(true); });
+            });
 
             const results = {};
             let done = 0;
@@ -931,6 +1034,15 @@
             else if (btn.dataset.action === 'toggle') {
                 listOpen = !listOpen;
                 setBar('done');
+            } else if (btn.dataset.action === 'trust') {
+                const origin = btn.dataset.origin;
+                if (origin && !isWhitelisted(origin)) {
+                    linkWhitelist.push(origin);
+                    saveWhitelist();
+                    if (lastCheck) applyStatusesToCards(lastCheck.results);
+                }
+                setBar('done');
+                setLive('Domaine marqué comme fonctionnel — il ne sera plus signalé.');
             }
         });
 
@@ -940,8 +1052,76 @@
         if (lastCheck) applyStatusesToCards(lastCheck.results);
         setBar(lastCheck ? 'done' : 'idle');
         if (!lastCheck || Date.now() - lastCheck.ts > CHECK_TTL_MS) {
-            setTimeout(() => runLinkCheck(), 1500);
+            // En arrière-plan, Chrome bride les requêtes (faux timeouts en série) :
+            // on attend que l'onglet soit visible pour lancer la vérification.
+            const start = () => setTimeout(() => runLinkCheck(), 1500);
+            if (document.visibilityState === 'visible') start();
+            else document.addEventListener('visibilitychange', function onVisible() {
+                if (document.visibilityState !== 'visible') return;
+                document.removeEventListener('visibilitychange', onVisible);
+                start();
+            });
         }
+
+        // ==========================================
+        // STARS GITHUB EN DIRECT (API publique, sans clé)
+        // CORS ouvert → fonctionne même en file://. Quota : 60 req/h sans
+        // clé ; cache 24 h en localStorage ; repli sur les valeurs en dur.
+        // ==========================================
+        const GH_STARS_KEY = 'toolboxRepoStars';
+
+        function ghRepoKey(url) {
+            const m = String(url).match(/^https:\/\/github\.com\/([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+)\/?$/);
+            return m ? m[1].toLowerCase() : null;
+        }
+
+        function updateRepoBadges() {
+            document.querySelectorAll('.repo-badges[data-repo-url]').forEach(b => {
+                const key = ghRepoKey(b.dataset.repoUrl);
+                if (!key) return;
+                const tool = toolsData.flatMap(c => c.tools).find(t => ghRepoKey(t.url) === key && t.stars !== undefined);
+                if (!tool) return;
+                const el = b.querySelector('.rb-stars');
+                if (el) el.textContent = `★ ${formatStars(tool.stars)}`;
+            });
+        }
+
+        async function refreshRepoStars() {
+            if (!navigator.onLine) return;
+            let cache = {};
+            try { cache = JSON.parse(localStorage.getItem(GH_STARS_KEY)) || {}; } catch (e) {}
+
+            const setStars = (key, stars) => toolsData.forEach(cat => cat.tools.forEach(t => {
+                if (ghRepoKey(t.url) === key) t.stars = stars;
+            }));
+
+            // 1. Pré-remplissage depuis le cache (aucune requête réseau)
+            let dirty = false;
+            Object.keys(cache).forEach(key => {
+                if (typeof cache[key].stars === 'number') { setStars(key, cache[key].stars); dirty = true; }
+            });
+            if (dirty) updateRepoBadges();
+
+            // 2. Rafraîchit les repos périmés (max 15 par session, ~6 s au total)
+            const now = Date.now();
+            const repos = [...new Set(toolsData.flatMap(c => c.tools).map(t => ghRepoKey(t.url)).filter(Boolean))];
+            const stale = repos.filter(k => !cache[k] || now - cache[k].at > 24 * 3600 * 1000).slice(0, 15);
+            for (const key of stale) {
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${key}`, { headers: { Accept: 'application/vnd.github+json' } });
+                    if (res.status === 403 || res.status === 429) break;   // quota atteint : on s'arrête là
+                    if (res.ok) {
+                        const d = await res.json();
+                        cache[key] = { at: now, stars: d.stargazers_count };
+                        setStars(key, d.stargazers_count);
+                        updateRepoBadges();
+                        try { localStorage.setItem(GH_STARS_KEY, JSON.stringify(cache)); } catch (e) {}
+                    }
+                } catch (e) { /* hors ligne ou bloqué : on garde les valeurs en dur */ }
+                await new Promise(r => setTimeout(r, 400));
+            }
+        }
+        setTimeout(refreshRepoStars, 2000);
 
         // ==========================================
         // ÉVÉNEMENTS (délégation unique)
